@@ -8,6 +8,7 @@ module com.example.tierpark {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
+    requires static lombok;
 
     opens com.example.tierpark to javafx.fxml;
     exports com.example.tierpark;

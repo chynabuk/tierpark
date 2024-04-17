@@ -1,6 +1,7 @@
 package com.example.tierpark;
 
-import com.example.tierpark.util.JdbcSQLServerConnection;
+import com.example.tierpark.entities.Role;
+import com.example.tierpark.services.impl.RoleService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,7 +22,8 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-        JdbcSQLServerConnection.connect();
+        RoleService roleService = new RoleService();
+        roleService.insert(Role.builder().name("Tierpfleger").build());
 //        launch();
     }
 }

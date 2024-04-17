@@ -16,26 +16,21 @@ public class JdbcSQLServerConnection {
 
         try {
             connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-            if (connection != null) {
-                DatabaseMetaData dm = connection.getMetaData();
-                System.out.println("Driver name: " + dm.getDriverName());
-                System.out.println("Driver version: " + dm.getDriverVersion());
-                System.out.println("Product name: " + dm.getDatabaseProductName());
-                System.out.println("Product version: " + dm.getDatabaseProductVersion());
-            }
-
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } finally {
-            try {
-                if (connection != null && !connection.isClosed()) {
-                    connection.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
         }
 
         return connection;
+    }
+
+    public static void close(){
+        try {
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+        }
+        catch (SQLException ex){
+            ex.printStackTrace();
+        }
     }
 }
