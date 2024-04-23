@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class JdbcSQLServerConnection {
-    private static final String SERVER = "Kuba\\DIGGER";
+    private static final String SERVER = "LESHA\\SQLEXPRESS";
     private static final String DB_URL = "jdbc:sqlserver://" + SERVER + ";databaseName=Tierpark;encrypt=false";
     private static final String USER = "sa";
     private static final String PASSWORD = "1234";
