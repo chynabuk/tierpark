@@ -19,8 +19,8 @@
             <String fx:value="align-center" />
          </styleClass>
       </Button>
-      <PasswordField layoutX="140.0" layoutY="261.0" prefHeight="26.0" prefWidth="206.0" />
-      <TextField layoutX="140.0" layoutY="200.0" prefHeight="26.0" prefWidth="206.0" styleClass="form-control" />
+      <PasswordField fx:id="password_id" layoutX="140.0" layoutY="261.0" prefHeight="26.0" prefWidth="206.0" />
+      <TextField fx:id="login_id" layoutX="140.0" layoutY="200.0" prefHeight="26.0" prefWidth="206.0" styleClass="form-control" />
       <Label layoutX="140.0" layoutY="174.0" text="Benutzername:" />
       <Label layoutX="213.0" layoutY="357.0" onMouseClicked="#signUpClicked" text="Anmeldung">
          <styleClass>

@@ -1,6 +1,5 @@
 package com.example.tierpark.controllers;
 
-import com.example.tierpark.entities.Animal;
 import com.example.tierpark.entities.Feed;
 import com.example.tierpark.services.impl.FeedService;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -42,10 +41,12 @@ public class FeedController {
     @FXML
     private TableView<Feed> feeds_table;
 
+    private FeedService feedService;
+
 
     @FXML
-    public void initialize() {
-        FeedService feedService = new FeedService();
+    private void initialize() {
+        feedService = new FeedService();
         col_id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(cellData.getValue().getId()));
         col_name.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getName()));
         col_measure.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getMeasure()));
@@ -62,7 +63,7 @@ public class FeedController {
             label_id.setText(feed.getId() + "");
             label_name.setText(feed.getName());
             label_measure.setText(feed.getMeasure());
-            label_price.setText(feed.getPricePerUnit() + "");
+            label_price.setText(feed.getPricePerUnit() + " €");
         } else {
             label_id.setText("");
             label_name.setText("");

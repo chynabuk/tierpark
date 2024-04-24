@@ -13,14 +13,14 @@
 <AnchorPane fx:id="container_id" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="648.0" prefWidth="490.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tierpark.controllers.SignUpController">
    <children>
       <Label layoutX="142.0" layoutY="483.0" text="Passwort:" />
-      <Button alignment="CENTER" layoutX="200.0" layoutY="568.0" mnemonicParsing="false" text="Anmelden">
+      <Button alignment="CENTER" layoutX="200.0" layoutY="568.0" mnemonicParsing="false" onAction="#signUpClicked" text="Anmelden">
          <styleClass>
             <String fx:value="btn" />
             <String fx:value="btn-warning" />
             <String fx:value="align-center" />
          </styleClass>
       </Button>
-      <PasswordField layoutX="142.0" layoutY="509.0" prefHeight="26.0" prefWidth="206.0" />
+      <PasswordField fx:id="password_id" layoutX="142.0" layoutY="509.0" prefHeight="26.0" prefWidth="206.0" />
       <Label layoutX="142.0" layoutY="422.0" text="Geschlecht:" />
       <Label layoutX="217.0" layoutY="604.0" onMouseClicked="#singInClicked" text="Einloggen">
          <styleClass>
@@ -28,15 +28,15 @@
             <String fx:value="text-center" />
          </styleClass>
       </Label>
-      <TextField layoutX="141.0" layoutY="388.0" prefHeight="26.0" prefWidth="206.0" />
+      <TextField fx:id="birthday_id" layoutX="141.0" layoutY="388.0" prefHeight="26.0" prefWidth="206.0" />
       <Label layoutX="141.0" layoutY="362.0" text="Geburtsdatum:" />
-      <TextField layoutX="142.0" layoutY="329.0" prefHeight="26.0" prefWidth="206.0" />
+      <TextField fx:id="last_name_id" layoutX="142.0" layoutY="329.0" prefHeight="26.0" prefWidth="206.0" />
       <Label layoutX="142.0" layoutY="303.0" text="Nachname:" />
-      <TextField layoutX="141.0" layoutY="269.0" prefHeight="26.0" prefWidth="206.0" />
+      <TextField fx:id="name_id" layoutX="141.0" layoutY="269.0" prefHeight="26.0" prefWidth="206.0" />
       <Label layoutX="141.0" layoutY="243.0" text="Vorname:" />
-      <TextField layoutX="141.0" layoutY="208.0" prefHeight="26.0" prefWidth="206.0" />
+      <TextField fx:id="login_id" layoutX="141.0" layoutY="208.0" prefHeight="26.0" prefWidth="206.0" />
       <Label layoutX="142.0" layoutY="180.0" text="Benutzername:" />
-      <ChoiceBox layoutX="142.0" layoutY="449.0" prefHeight="26.0" prefWidth="206.0" />
+      <ChoiceBox fx:id="gender_id" layoutX="142.0" layoutY="449.0" prefHeight="26.0" prefWidth="206.0" />
       <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="193.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/zoo_logo.png" />
