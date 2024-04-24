@@ -52,7 +52,7 @@ public class FeedController {
         col_id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(cellData.getValue().getId()));
         col_name.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getName()));
         col_measure.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getMeasure()));
-        col_price.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(cellData.getValue().getPricePerUnit()));
+        col_price.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(cellData.getValue().getPricePerUnit() + " €"));
         updateTable();
     }
 

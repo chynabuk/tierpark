@@ -3,6 +3,7 @@ package com.example.tierpark.controllers;
 import com.example.tierpark.StartApplication;
 import com.example.tierpark.entities.User;
 import com.example.tierpark.services.impl.UserService;
+import com.example.tierpark.util.CurrentUser;
 import com.example.tierpark.util.WindowUtil;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,7 +53,8 @@ public class SignInController {
     protected void clickedSignIn() throws IOException {
         User user = isInputValid();
         if (user != null) {
-            WindowUtil.openWindow((Stage) container_id.getScene().getWindow(), "feed-view.fxml");
+            WindowUtil.openWindow((Stage) container_id.getScene().getWindow(), "family-view.fxml");
+            CurrentUser.setUser(user);
         }
     }
 
