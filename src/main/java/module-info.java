@@ -14,4 +14,6 @@ module com.example.tierpark {
     exports com.example.tierpark;
     exports com.example.tierpark.controllers;
     opens com.example.tierpark.controllers to javafx.fxml;
+    exports com.example.tierpark.controllers.feed;
+    opens com.example.tierpark.controllers.feed to javafx.fxml;
 }

@@ -3,6 +3,7 @@ package com.example.tierpark.controllers;
 import com.example.tierpark.StartApplication;
 import com.example.tierpark.entities.User;
 import com.example.tierpark.services.impl.UserService;
+import com.example.tierpark.util.WindowUtil;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -51,15 +52,7 @@ public class SignInController {
     protected void clickedSignIn() throws IOException {
         User user = isInputValid();
         if (user != null) {
-            ((Stage) container_id.getScene().getWindow()).close();
-            FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("feed-view.fxml"));
-            Stage stage = new Stage();
-            Scene scene = new Scene(fxmlLoader.load());
-            scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
-            stage.setTitle("Tierpark");
-            stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/zoo_logo.png")));
-            stage.setScene(scene);
-            stage.show();
+            WindowUtil.openWindow((Stage) container_id.getScene().getWindow(), "feed-view.fxml");
         }
     }
 
