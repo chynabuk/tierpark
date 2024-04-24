@@ -11,11 +11,13 @@ import java.sql.Date;
 @Setter
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Keeper{
+public class User {
     int id;
     int genderId;
     int roleId;
     Date birthDate;
     String lastname;
     String name;
+    String login;
+    String password;
 }
