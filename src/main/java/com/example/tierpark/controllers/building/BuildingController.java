@@ -1,5 +1,6 @@
 package com.example.tierpark.controllers.building;
 
+import com.example.tierpark.controllers.NavbarController;
 import com.example.tierpark.entities.Building;
 import com.example.tierpark.services.impl.BuildingService;
 import com.example.tierpark.util.DateUtil;
@@ -13,8 +14,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
-public class BuildingController {
+public class BuildingController extends NavbarController {
     @FXML
     private Label label_id;
 

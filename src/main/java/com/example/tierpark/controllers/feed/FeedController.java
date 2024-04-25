@@ -1,5 +1,6 @@
 package com.example.tierpark.controllers.feed;
 
+import com.example.tierpark.controllers.NavbarController;
 import com.example.tierpark.entities.Feed;
 import com.example.tierpark.services.impl.FeedService;
 import com.example.tierpark.util.WindowUtil;
@@ -13,7 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-public class FeedController {
+public class FeedController extends NavbarController {
 
     @FXML
     private Label label_id;

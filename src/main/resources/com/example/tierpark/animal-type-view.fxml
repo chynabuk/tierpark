@@ -34,16 +34,23 @@
               <menus>
                 <Menu mnemonicParsing="false" text="Tiere">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Tiere" />
-                        <MenuItem mnemonicParsing="false" text="Tiertypen" />
-                        <MenuItem mnemonicParsing="false" text="Tierfamilien" />
-                        <MenuItem mnemonicParsing="false" text="Tierklassen" />
+                        <MenuItem mnemonicParsing="false" onAction="#showAnimals" text="Tiere" />
+                        <MenuItem mnemonicParsing="false" onAction="#showAnimalTypes" text="Tiertypen" />
+                        <MenuItem mnemonicParsing="false" onAction="#showAnimalFamilies" text="Tierfamilien" />
+                        <MenuItem mnemonicParsing="false" onAction="#showAnimalClasses" text="Tierklassen" />
                         <MenuItem mnemonicParsing="false" text="Tierfüttern" />
                         <MenuItem mnemonicParsing="false" text="Pflegen" />
                      </items></Menu>
-                <Menu mnemonicParsing="false" text="Füttern" />
+                <Menu mnemonicParsing="false" onAction="#showFeeds" text="Füttern">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Füttern zeigen" />
+                     </items></Menu>
                 <Menu mnemonicParsing="false" text="Pflegetypen" />
-                  <Menu mnemonicParsing="false" text="Gebäude" />
+                  <Menu mnemonicParsing="false" onAction="#showBuildings" text="Gebäude">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Gebäude zeigen" />
+                     </items>
+                  </Menu>
               </menus>
             </MenuBar>
          </children>
