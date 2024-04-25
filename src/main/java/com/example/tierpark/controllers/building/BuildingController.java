@@ -74,8 +74,8 @@ public class BuildingController {
         }
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Keine Auswahl");
-        alert.setHeaderText("Kein Feed ausgewählt");
-        alert.setContentText("Bitte wählen Sie einen Feed in der Tabelle aus.");
+        alert.setHeaderText("Kein Gebäude ausgewählt");
+        alert.setContentText("Bitte wählen Sie ein Gebäude in der Tabelle aus.");
 
         alert.showAndWait();
         return false;
