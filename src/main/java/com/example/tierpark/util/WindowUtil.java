@@ -1,6 +1,7 @@
 package com.example.tierpark.util;
 
 import com.example.tierpark.StartApplication;
+import com.example.tierpark.controllers.NavbarController;
 import com.example.tierpark.controllers.animalClass.ClassUpdateController;
 import com.example.tierpark.controllers.animalFamily.FamilyUpdateController;
 import com.example.tierpark.controllers.animalTypes.AnimalTypeUpdateController;
@@ -28,6 +29,8 @@ public class WindowUtil {
         scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
         stage.setTitle("Tierpark");
         stage.getIcons().add(new Image(WindowUtil.class.getResourceAsStream("/images/zoo_logo.png")));
+        NavbarController controller = fxmlLoader.getController();
+        controller.setStageToClose(stage);
         stage.setScene(scene);
         stage.show();
     }

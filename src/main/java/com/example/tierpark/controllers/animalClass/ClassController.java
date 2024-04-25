@@ -1,5 +1,6 @@
 package com.example.tierpark.controllers.animalClass;
 
+import com.example.tierpark.controllers.NavbarController;
 import com.example.tierpark.entities.AnimalClass;
 import com.example.tierpark.services.impl.AnimalClassService;
 import com.example.tierpark.util.WindowUtil;
@@ -12,8 +13,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
-public class ClassController {
+public class ClassController extends NavbarController {
 
     @FXML
     private Label label_id;

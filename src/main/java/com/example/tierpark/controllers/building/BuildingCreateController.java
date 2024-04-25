@@ -40,10 +40,10 @@ public class BuildingCreateController {
             errorMessage += "Kein gültiger Name!\n";
         }
         if (built_date_id.getText() == null || built_date_id.getText().length() == 0) {
-            errorMessage += "Kein gültiges Baujahr!\n";
+            errorMessage += "Kein gültiges Baudatum!\n";
         } else {
             if (!DateUtil.validDate(built_date_id.getText())) {
-                errorMessage += "Kein gültiges Baujahr. Verwenden Sie das Format tt.mm.JJJJ!\n";
+                errorMessage += "Kein gültiges Baudatum. Verwenden Sie das Format tt.mm.JJJJ!\n";
             }
         }
 
