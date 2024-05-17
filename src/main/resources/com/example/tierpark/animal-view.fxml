@@ -47,7 +47,11 @@
                      <items>
                         <MenuItem mnemonicParsing="false" text="Füttern zeigen" />
                      </items></Menu>
-                <Menu mnemonicParsing="false" text="Pflegetypen" />
+                  <Menu mnemonicParsing="false" onAction="#showCareTypes" text="Pflegetypen" >
+                      <items>
+                          <MenuItem mnemonicParsing="false" text="Pflegetypen zeigen" />
+                      </items>
+                  </Menu>
                   <Menu mnemonicParsing="false" onAction="#showBuildings" text="Gebäude">
                      <items>
                         <MenuItem mnemonicParsing="false" text="Gebäude zeigen" />

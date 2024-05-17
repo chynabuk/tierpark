@@ -14,11 +14,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
+<?import javafx.scene.control.MenuItem?>
 <SplitPane dividerPositions="0.5479595395884198" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="575.0" prefWidth="600.0" stylesheets="@../../../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tierpark.controllers.careType.CareTypeController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="292.0" prefWidth="598.0">
          <children>
-            <TableView fx:id="care_type_table" layoutX="12.0" layoutY="78.0" prefHeight="228.0" prefWidth="574.0">
+            <Label layoutX="12.0" layoutY="45.0" styleClass="h4" text="Pflegetypen" />
+            <TableView fx:id="table_id" layoutX="12.0" layoutY="78.0" prefHeight="228.0" prefWidth="574.0">
                <columns>
                   <TableColumn fx:id="col_id" prefWidth="33.60000705718994" text="#" />
                   <TableColumn fx:id="col_name" minWidth="8.0" prefWidth="253.5999870300293" text="Name" />
@@ -28,14 +30,33 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Label layoutX="12.0" layoutY="45.0" styleClass="h4" text="Pflegetypen" />
-            <MenuBar layoutY="1.0" prefHeight="26.0" prefWidth="598.0">
-              <menus>
-                <Menu mnemonicParsing="false" text="Tiere" />
-                <Menu mnemonicParsing="false" text="Edit" />
-                <Menu mnemonicParsing="false" text="Help" />
-              </menus>
-            </MenuBar>
+             <MenuBar layoutY="1.0" prefHeight="26.0" prefWidth="598.0">
+                 <menus>
+                     <Menu mnemonicParsing="false" text="Tiere">
+                         <items>
+                             <MenuItem mnemonicParsing="false" onAction="#showAnimals" text="Tiere" />
+                             <MenuItem mnemonicParsing="false" onAction="#showAnimalTypes" text="Tiertypen" />
+                             <MenuItem mnemonicParsing="false" onAction="#showAnimalFamilies" text="Tierfamilien" />
+                             <MenuItem mnemonicParsing="false" onAction="#showAnimalClasses" text="Tierklassen" />
+                             <MenuItem mnemonicParsing="false" text="Tierfüttern" />
+                             <MenuItem mnemonicParsing="false" text="Pflegen" />
+                         </items></Menu>
+                     <Menu mnemonicParsing="false" onAction="#showFeeds" text="Füttern">
+                         <items>
+                             <MenuItem mnemonicParsing="false" text="Füttern zeigen" />
+                         </items></Menu>
+                     <Menu mnemonicParsing="false" onAction="#showCareTypes" text="Pflegetypen" >
+                         <items>
+                             <MenuItem mnemonicParsing="false" text="Pflegetypen zeigen" />
+                         </items>
+                     </Menu>
+                     <Menu mnemonicParsing="false" onAction="#showBuildings" text="Gebäude">
+                         <items>
+                             <MenuItem mnemonicParsing="false" text="Gebäude zeigen" />
+                         </items>
+                     </Menu>
+                 </menus>
+             </MenuBar>
          </children>
       </AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="295.0" prefWidth="598.0">

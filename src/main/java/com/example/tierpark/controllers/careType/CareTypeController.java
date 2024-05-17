@@ -1,5 +1,6 @@
 package com.example.tierpark.controllers.careType;
 
+import com.example.tierpark.controllers.NavbarController;
 import com.example.tierpark.entities.CareType;
 import com.example.tierpark.services.impl.CareTypeService;
 import com.example.tierpark.util.WindowUtil;
@@ -13,7 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-public class CareTypeController {
+public class CareTypeController extends NavbarController {
     @FXML
     private Label label_id;
 
@@ -33,7 +34,7 @@ public class CareTypeController {
     private TableColumn<CareType, String> col_description;
 
     @FXML
-    private TableView<CareType> care_type_table;
+    private TableView<CareType> table_id;
 
     private CareTypeService careTypeService;
 
@@ -49,8 +50,8 @@ public class CareTypeController {
 
     private void updateTable() {
         ObservableList<CareType> careTypes = FXCollections.observableArrayList(careTypeService.readAll());
-        care_type_table.setItems(careTypes);
-        care_type_table.getSelectionModel().selectedItemProperty().addListener(
+        table_id.setItems(careTypes);
+        table_id.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showDetails(newValue));
     }
 
@@ -67,7 +68,7 @@ public class CareTypeController {
     }
 
     private boolean noSelectedHandle() {
-        int selectedIndex = care_type_table.getSelectionModel().getSelectedIndex();
+        int selectedIndex = table_id.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
             return true;
         }
@@ -97,7 +98,7 @@ public class CareTypeController {
     @FXML
     private void deleteClicked() {
         if (noSelectedHandle()) {
-            careTypeService.delete(care_type_table.getSelectionModel().getSelectedItem().getId());
+            careTypeService.delete(table_id.getSelectionModel().getSelectedItem().getId());
             updateTable();
         }
     }
