@@ -1,6 +1,7 @@
 package com.example.tierpark.services.impl;
 
 import com.example.tierpark.entities.Animal;
+import com.example.tierpark.entities.Gender;
 import com.example.tierpark.services.CrudOperations;
 
 import java.sql.PreparedStatement;
@@ -23,7 +24,7 @@ public class AnimalService extends CrudOperations<Animal> {
                 .birthdate(resultSet.getDate("birthdate"))
                 .animalTypeId(resultSet.getInt("animal_type_id"))
                 .buildingId(resultSet.getInt("building_id"))
-                .genderId(resultSet.getInt("gender_id"))
+                .gender(resultSet.getInt("gender_id") == 1 ? Gender.MAN : Gender.WOMAN)
                 .build();
     }
 
@@ -33,7 +34,7 @@ public class AnimalService extends CrudOperations<Animal> {
         statement.setDate(2, object.getBirthdate());
         statement.setInt(3, object.getAnimalTypeId());
         statement.setInt(4, object.getBuildingId());
-        statement.setInt(5, object.getGenderId());
+        statement.setInt(5, object.getGender().getId());
     }
 
     @Override

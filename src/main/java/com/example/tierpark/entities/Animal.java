@@ -17,5 +17,5 @@ public class Animal {
     Date birthdate;
     int animalTypeId;
     int buildingId;
-    int genderId;
+    Gender gender;
 }
