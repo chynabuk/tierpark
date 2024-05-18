@@ -28,4 +28,7 @@ module com.example.tierpark {
     opens com.example.tierpark.controllers.careType to javafx.fxml;
     exports com.example.tierpark.controllers.animal;
     opens com.example.tierpark.controllers.animal to javafx.fxml;
+    exports com.example.tierpark.controllers.care;
+    opens com.example.tierpark.controllers.care to javafx.fxml;
+
 }

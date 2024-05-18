@@ -48,5 +48,9 @@ public abstract class NavbarController {
         WindowUtil.openWindow(stageToClose, "care-type-view.fxml");
     }
 
+    @FXML
+    protected void showCare() throws IOException{
+        WindowUtil.openWindow(stageToClose, "care-view.fxml");
+    }
 
 }
