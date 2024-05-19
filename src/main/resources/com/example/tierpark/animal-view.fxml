@@ -40,8 +40,8 @@
                         <MenuItem mnemonicParsing="false" onAction="#showAnimalTypes" text="Tiertypen" />
                         <MenuItem mnemonicParsing="false" onAction="#showAnimalFamilies" text="Tierfamilien" />
                         <MenuItem mnemonicParsing="false" onAction="#showAnimalClasses" text="Tierklassen" />
-                        <MenuItem mnemonicParsing="false" text="Tierfüttern" />
-                        <MenuItem mnemonicParsing="false" onAction="#showCare" text="Pflegen" />
+                         <MenuItem mnemonicParsing="false" onAction="#showFeedAnimals" text="Tierfüttern" />
+                         <MenuItem mnemonicParsing="false" onAction="#showCare" text="Pflegen" />
                      </items></Menu>
                 <Menu mnemonicParsing="false" onAction="#showFeeds" text="Füttern">
                      <items>

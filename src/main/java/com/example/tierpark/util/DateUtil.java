@@ -1,8 +1,13 @@
 package com.example.tierpark.util;
 
 import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Helper functions for handling dates using java.sql.Date.
@@ -13,10 +18,13 @@ public class DateUtil {
 
     /** The date pattern that is used for conversion. Change as you wish. */
     private static final String DATE_PATTERN = "dd.MM.yyyy";
+    private static final String DATE_TIME_PATTERN = "dd.MM.yyyy HH:mm:ss";
 
     /** The date formatter. */
     private static final SimpleDateFormat DATE_FORMATTER =
             new SimpleDateFormat(DATE_PATTERN);
+
+    private static final DateTimeFormatter DATE_TIME_PATTERN_FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
 
     /**
      * Returns the given date as a well formatted String. The above defined
@@ -30,6 +38,11 @@ public class DateUtil {
             return null;
         }
         return DATE_FORMATTER.format(date);
+    }
+
+    public static String format(Timestamp timestamp){
+        LocalDateTime localDateTime = timestamp.toLocalDateTime();
+        return localDateTime != null ? localDateTime.format(DATE_TIME_PATTERN_FORMATTER) : "";
     }
 
     /**
@@ -50,6 +63,18 @@ public class DateUtil {
         }
     }
 
+    public static Timestamp parseDatetime(String datetimeString){
+        try {
+            LocalDateTime localDateTime = LocalDateTime.parse(datetimeString, DATE_TIME_PATTERN_FORMATTER);
+            return Timestamp.valueOf(localDateTime);
+        }
+        catch (DateTimeParseException e){
+            return null;
+        }
+    }
+
+
+
     /**
      * Checks the String whether it is a valid date.
      *
@@ -59,5 +84,9 @@ public class DateUtil {
     public static boolean validDate(String dateString) {
         // Try to parse the String.
         return DateUtil.parse(dateString) != null;
+    }
+
+    public static boolean validDatetime(String datetimeString){
+        return parseDatetime(datetimeString) != null;
     }
 }

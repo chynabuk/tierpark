@@ -20,6 +20,7 @@ public class FeedAnimalService extends CrudOperations<FeedAnimal> {
         return FeedAnimal.builder()
                 .id(resultSet.getInt("id"))
                 .feedDateTime(resultSet.getTimestamp("feed_datetime"))
+                .feedAmount(resultSet.getInt("amount_of_feed"))
                 .feedId(resultSet.getInt("feed_id"))
                 .keeperId(resultSet.getInt("keeper_id"))
                 .animalId(resultSet.getInt("animal_id"))
