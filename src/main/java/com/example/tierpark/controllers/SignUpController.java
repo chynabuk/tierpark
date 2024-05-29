@@ -82,6 +82,7 @@ public class SignUpController {
                     .birthDate(DateUtil.parse(birthday_id.getText()))
                     .password(password_id.getText())
                     .genderId(gender.getId())
+                    .roleId(1)
                     .roleId(2)
                     .build();
             userService.insert(user);

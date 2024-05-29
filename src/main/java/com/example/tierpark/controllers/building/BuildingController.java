@@ -14,7 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.stage.Stage;
+import org.w3c.dom.Element;
 
 public class BuildingController extends NavbarController {
     @FXML
@@ -39,34 +39,43 @@ public class BuildingController extends NavbarController {
     private TableView<Building> building_table;
 
     private BuildingService buildingService;
-
+    private ObservableList<Building> buildingList;
 
     @FXML
     private void initialize() {
         buildingService = new BuildingService();
-        col_id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(cellData.getValue().getId()));
+        fileName = buildingService.getTableName();
+
+        // Load all data once
+        buildingList = FXCollections.observableArrayList(buildingService.readAll());
+
+        col_id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
         col_name.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getName()));
         col_built_date.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(DateUtil.format(cellData.getValue().getBuiltDate())));
+
         updateTable();
     }
 
     private void updateTable() {
-        ObservableList<Building> feeds = FXCollections.observableArrayList(buildingService.readAll());
-        building_table.setItems(feeds);
+        building_table.setItems(buildingList);
         building_table.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showDetails(newValue));
     }
 
     private void showDetails(Building building) {
         if (building != null) {
-            label_id.setText(building.getId() + "");
+            label_id.setText(String.valueOf(building.getId()));
             label_name.setText(building.getName());
             label_built_date.setText(DateUtil.format(building.getBuiltDate()));
         } else {
-            label_id.setText("");
-            label_name.setText("");
-            label_built_date.setText("");
+            clearLabels();
         }
+    }
+
+    private void clearLabels() {
+        label_id.setText("");
+        label_name.setText("");
+        label_built_date.setText("");
     }
 
     private boolean noSelectedHandle() {
@@ -74,26 +83,29 @@ public class BuildingController extends NavbarController {
         if (selectedIndex >= 0) {
             return true;
         }
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Keine Auswahl");
-        alert.setHeaderText("Kein Gebäude ausgewählt");
-        alert.setContentText("Bitte wählen Sie ein Gebäude in der Tabelle aus.");
-
-        alert.showAndWait();
+        showAlert("Keine Auswahl", "Kein Gebäude ausgewählt", "Bitte wählen Sie ein Gebäude in der Tabelle aus.");
         return false;
+    }
+
+    private void showAlert(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
     @FXML
     private void createClicked() {
         if (WindowUtil.openWindowWithoutClosing("building-create.fxml")) {
-            updateTable();
+            refreshBuildingList();
         }
     }
 
     @FXML
     private void editClicked() {
         if (noSelectedHandle() && WindowUtil.openWindowWithoutClosing("building-edit.fxml", building_table.getSelectionModel().getSelectedItem())) {
-            updateTable();
+            refreshBuildingList();
         }
     }
 
@@ -101,7 +113,32 @@ public class BuildingController extends NavbarController {
     private void deleteClicked() {
         if (noSelectedHandle()) {
             buildingService.delete(building_table.getSelectionModel().getSelectedItem().getId());
-            updateTable();
+            refreshBuildingList();
+        }
+    }
+
+    private void refreshBuildingList() {
+        buildingList.setAll(buildingService.readAll());
+        building_table.refresh();
+    }
+
+    @Override
+    protected void setupXML() {
+        for (Building building : buildingList) {
+            Element buildingElement = document.createElement("Building");
+            rootElement.appendChild(buildingElement);
+
+            Element id = document.createElement("ID");
+            id.appendChild(document.createTextNode(String.valueOf(building.getId())));
+            buildingElement.appendChild(id);
+
+            Element name = document.createElement("Name");
+            name.appendChild(document.createTextNode(building.getName()));
+            buildingElement.appendChild(name);
+
+            Element builtDate = document.createElement("BuiltDate");
+            builtDate.appendChild(document.createTextNode(DateUtil.format(building.getBuiltDate())));
+            buildingElement.appendChild(builtDate);
         }
     }
 }

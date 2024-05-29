@@ -3,6 +3,7 @@ package com.example.tierpark.services.impl;
 import com.example.tierpark.entities.User;
 import com.example.tierpark.services.CrudOperations;
 import com.example.tierpark.util.JdbcSQLServerConnection;
+import javafx.scene.control.Alert;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -30,6 +31,8 @@ public class UserService extends CrudOperations<User> {
             if (resultSet.next()){
                 object = build(resultSet);
                 System.out.println("Record read");
+                CurrentUserService.setCurrentUser(object);
+                JdbcSQLServerConnection.changeConfiguration(object.getRoleId());
             }
             else {
                 System.out.println("Record is not found");
@@ -92,5 +95,40 @@ public class UserService extends CrudOperations<User> {
             return password;
         }
 
+    }
+
+    @Override
+    public void delete(int id) {
+        deleteKeeperFromDependedTables(id, "Care");
+        deleteKeeperFromDependedTables(id, "Feed_animals");
+        super.delete(id);
+    }
+
+    private void deleteKeeperFromDependedTables(int id, String tableName){
+        Connection connection = JdbcSQLServerConnection.connect();
+
+        String sql = "DELETE FROM " + tableName + " WHERE keeper_id=?";
+
+        try(PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, id);
+
+            if (statement.executeUpdate() > 0){
+                System.out.println("Record deleted");
+            }
+        }
+        catch (SQLException e) {
+            if ("42000".equals(e.getSQLState()) || e.getErrorCode() == 229) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erlaubnis verweigert");
+                alert.setContentText("Die DELETE-Erlaubnis wurde für die Tabelle '" + tableName + "' verweigert");
+                alert.showAndWait();
+            } else {
+                // Handle other SQL exceptions
+                e.printStackTrace();
+            }
+        }
+        finally {
+            JdbcSQLServerConnection.close();
+        }
     }
 }

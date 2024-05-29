@@ -187,7 +187,7 @@
                         <String fx:value="btn-danger" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="exportBtn" layoutX="28.0" layoutY="10.0" mnemonicParsing="false" onAction="#createClicked" prefHeight="26.0" prefWidth="150.0" text="Export to XML">
+                  <Button fx:id="exportBtn" layoutX="28.0" layoutY="10.0" mnemonicParsing="false" onAction="#exportToXML" prefHeight="26.0" prefWidth="150.0" text="Export to XML">
                      <styleClass>
                         <String fx:value="btn" />
                         <String fx:value="btn-success" />

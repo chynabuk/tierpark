@@ -13,7 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.stage.Stage;
+import org.w3c.dom.Element;
 
 public class ClassController extends NavbarController {
 
@@ -22,7 +22,6 @@ public class ClassController extends NavbarController {
 
     @FXML
     private Label label_name;
-
 
     @FXML
     private TableColumn<AnimalClass, Integer> col_id;
@@ -34,30 +33,39 @@ public class ClassController extends NavbarController {
     private TableView<AnimalClass> table_id;
 
     private AnimalClassService service;
+    private ObservableList<AnimalClass> classList;
 
     @FXML
     private void initialize() {
         service = new AnimalClassService();
-        col_id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(cellData.getValue().getId()));
+        fileName = service.getTableName();
+        // Load all data once
+        classList = FXCollections.observableArrayList(service.readAll());
+
+        col_id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
         col_name.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getName()));
+
         updateTable();
     }
 
     private void updateTable() {
-        ObservableList<AnimalClass> entities = FXCollections.observableArrayList(service.readAll());
-        table_id.setItems(entities);
+        table_id.setItems(classList);
         table_id.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showDetails(newValue));
     }
 
     private void showDetails(AnimalClass animalClass) {
         if (animalClass != null) {
-            label_id.setText(animalClass.getId() + "");
+            label_id.setText(String.valueOf(animalClass.getId()));
             label_name.setText(animalClass.getName());
         } else {
-            label_id.setText("");
-            label_name.setText("");
+            clearLabels();
         }
+    }
+
+    private void clearLabels() {
+        label_id.setText("");
+        label_name.setText("");
     }
 
     private boolean noSelectedHandle() {
@@ -65,26 +73,29 @@ public class ClassController extends NavbarController {
         if (selectedIndex >= 0) {
             return true;
         }
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Keine Auswahl");
-        alert.setHeaderText("Keine Tierklasse ausgewählt");
-        alert.setContentText("Bitte wählen Sie eine Tierklasse in der Tabelle aus.");
-
-        alert.showAndWait();
+        showAlert("Keine Auswahl", "Keine Tierklasse ausgewählt", "Bitte wählen Sie eine Tierklasse in der Tabelle aus.");
         return false;
+    }
+
+    private void showAlert(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
     @FXML
     private void createClicked() {
         if (WindowUtil.openWindowWithoutClosing("class-create.fxml")) {
-            updateTable();
+            refreshClassList();
         }
     }
 
     @FXML
     private void editClicked() {
         if (noSelectedHandle() && WindowUtil.openWindowWithoutClosing("class-edit.fxml", table_id.getSelectionModel().getSelectedItem())) {
-            updateTable();
+            refreshClassList();
         }
     }
 
@@ -92,8 +103,28 @@ public class ClassController extends NavbarController {
     private void deleteClicked() {
         if (noSelectedHandle()) {
             service.delete(table_id.getSelectionModel().getSelectedItem().getId());
-            updateTable();
+            refreshClassList();
         }
     }
 
+    private void refreshClassList() {
+        classList.setAll(service.readAll());
+        table_id.refresh();
+    }
+
+    @Override
+    protected void setupXML() {
+        for (AnimalClass animalClass : classList) {
+            Element classElement = document.createElement("AnimalClass");
+            rootElement.appendChild(classElement);
+
+            Element id = document.createElement("ID");
+            id.appendChild(document.createTextNode(String.valueOf(animalClass.getId())));
+            classElement.appendChild(id);
+
+            Element name = document.createElement("Name");
+            name.appendChild(document.createTextNode(animalClass.getName()));
+            classElement.appendChild(name);
+        }
+    }
 }

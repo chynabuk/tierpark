@@ -3,7 +3,10 @@ package com.example.tierpark.services.impl;
 import com.example.tierpark.entities.Animal;
 import com.example.tierpark.entities.Gender;
 import com.example.tierpark.services.CrudOperations;
+import com.example.tierpark.util.JdbcSQLServerConnection;
+import javafx.scene.control.Alert;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,5 +45,40 @@ public class AnimalService extends CrudOperations<Animal> {
         prepareStatementCreatingSetup(object, statement);
         statement.setInt(6, object.getId());
 
+    }
+
+    @Override
+    public void delete(int id) {
+        deleteAnimalFromDependedTables(id, "Care");
+        deleteAnimalFromDependedTables(id, "Feed_animals");
+        super.delete(id);
+    }
+
+    private void deleteAnimalFromDependedTables(int id, String tableName){
+        Connection connection = JdbcSQLServerConnection.connect();
+
+        String sql = "DELETE FROM " + tableName + " WHERE animal_id=?";
+
+        try(PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, id);
+
+            if (statement.executeUpdate() > 0){
+                System.out.println("Record deleted");
+            }
+        }
+        catch (SQLException e) {
+            if ("42000".equals(e.getSQLState()) || e.getErrorCode() == 229) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erlaubnis verweigert");
+                alert.setContentText("Die DELETE-Erlaubnis wurde für die Tabelle '" + tableName + "' verweigert");
+                alert.showAndWait();
+            } else {
+                // Handle other SQL exceptions
+                e.printStackTrace();
+            }
+        }
+        finally {
+            JdbcSQLServerConnection.close();
+        }
     }
 }
