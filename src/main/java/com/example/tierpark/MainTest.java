@@ -1,38 +1,26 @@
 package com.example.tierpark;
 
 import com.example.tierpark.entities.Feed;
+import com.example.tierpark.entities.User;
 import com.example.tierpark.services.impl.FeedService;
+import com.example.tierpark.services.impl.UserService;
 
+import java.sql.Date;
 import java.util.List;
 
 public class MainTest {
     public static void main(String[] args) {
-        FeedService feedService = new FeedService();
-//        feedService.insert(
-//                Feed.builder()
-//                        .name("Banana")
-//                        .measure("ST")
-//                        .pricePerUnit(4)
-//                        .build());
-
-        List<Feed> feeds = feedService.readAll();
-        for(Feed f : feeds){
-            System.out.println(f);
-        }
-
-        Feed feed = feeds.get(0);
-        feed.setName("Et");
-        feedService.update(feed);
-
-        feeds = feedService.readAll();
-        for(Feed f : feeds){
-            System.out.println(f);
-        }
-
-        feedService.delete(feed.getId());
-        feeds = feedService.readAll();
-        for(Feed f : feeds){
-            System.out.println(f);
-        }
+        UserService userService = new UserService();
+        userService.insert(
+                User.builder()
+                        .name("Kubanychbek")
+                        .lastname("Kushtarbekov")
+                        .login("kuba")
+                        .birthDate(new Date(2002, 3, 6))
+                        .genderId(1)
+                        .roleId(3)
+                        .password("1234")
+                        .build()
+        );
     }
 }

@@ -1,6 +1,7 @@
 package com.example.tierpark.services;
 
 import com.example.tierpark.util.JdbcSQLServerConnection;
+import javafx.scene.control.Alert;
 import lombok.RequiredArgsConstructor;
 
 import java.sql.*;
@@ -24,7 +25,15 @@ public abstract class CrudOperations<DT>{
             }
         }
         catch (SQLException e) {
-            e.printStackTrace();
+            if ("42000".equals(e.getSQLState()) || e.getErrorCode() == 229) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erlaubnis verweigert");
+                alert.setContentText("Die INSERT-Erlaubnis wurde für die Tabelle '" + tableName + "' verweigert");
+                alert.showAndWait();
+            } else {
+                // Handle other SQL exceptions
+                e.printStackTrace();
+            }
         }
         finally {
             JdbcSQLServerConnection.close();
@@ -41,7 +50,14 @@ public abstract class CrudOperations<DT>{
             }
         }
         catch (SQLException e) {
-            e.printStackTrace();
+            if ("42000".equals(e.getSQLState()) || e.getErrorCode() == 229) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erlaubnis verweigert");
+                alert.setContentText("Die UPDATE-Erlaubnis wurde für die Tabelle '" + tableName + "' verweigert");
+                alert.showAndWait();
+            } else {
+                e.printStackTrace();
+            }
         }
         finally {
             JdbcSQLServerConnection.close();
@@ -59,7 +75,15 @@ public abstract class CrudOperations<DT>{
             }
         }
         catch (SQLException e) {
-            e.printStackTrace();
+            if ("42000".equals(e.getSQLState()) || e.getErrorCode() == 229) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erlaubnis verweigert");
+                alert.setContentText("Die DELETE-Erlaubnis wurde für die Tabelle '" + tableName + "' verweigert");
+                alert.showAndWait();
+            } else {
+                // Handle other SQL exceptions
+                e.printStackTrace();
+            }
         }
         finally {
             JdbcSQLServerConnection.close();
@@ -82,7 +106,15 @@ public abstract class CrudOperations<DT>{
             }
         }
         catch (SQLException e) {
-            e.printStackTrace();
+            if ("42000".equals(e.getSQLState()) || e.getErrorCode() == 229) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erlaubnis verweigert");
+                alert.setContentText("Die SELECT-Erlaubnis wurde für die Tabelle '" + tableName + "' verweigert");
+                alert.showAndWait();
+            } else {
+                // Handle other SQL exceptions
+                e.printStackTrace();
+            }
         }
         finally {
             JdbcSQLServerConnection.close();
@@ -104,7 +136,15 @@ public abstract class CrudOperations<DT>{
             }
         }
         catch (SQLException e) {
-            e.printStackTrace();
+            if ("42000".equals(e.getSQLState()) || e.getErrorCode() == 229) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erlaubnis verweigert");
+                alert.setContentText("Die SELECT-Erlaubnis wurde für die Tabelle '" + tableName + "' verweigert");
+                alert.showAndWait();
+            } else {
+                // Handle other SQL exceptions
+                e.printStackTrace();
+            }
         }
         finally {
             JdbcSQLServerConnection.close();

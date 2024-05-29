@@ -81,7 +81,7 @@ public class SignUpController {
                     .birthDate(DateUtil.parse(birthday_id.getText()))
                     .password(password_id.getText())
                     .genderId(gender.getId())
-                    .roleId(3)
+                    .roleId(1)
                     .build();
             userService.insert(user);
             CurrentUser.setUser(user);

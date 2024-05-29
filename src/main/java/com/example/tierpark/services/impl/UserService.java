@@ -30,6 +30,8 @@ public class UserService extends CrudOperations<User> {
             if (resultSet.next()){
                 object = build(resultSet);
                 System.out.println("Record read");
+                CurrentUserService.setCurrentUser(object);
+                JdbcSQLServerConnection.changeConfiguration(object.getRoleId());
             }
             else {
                 System.out.println("Record is not found");
