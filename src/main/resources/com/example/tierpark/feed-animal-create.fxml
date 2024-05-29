@@ -18,11 +18,11 @@
       </Button>
       <Label alignment="CENTER" layoutX="91.0" layoutY="31.0" prefHeight="18.0" prefWidth="306.0" styleClass="h3" text="Neues Tierfutter" textAlignment="CENTER" />
       <Label layoutX="143.0" layoutY="212.0" prefHeight="18.0" prefWidth="206.0" text="Tier:" />
-      <TextField fx:id="feed_date_time" layoutX="141.0" layoutY="368.0" prefHeight="26.0" prefWidth="206.0" styleClass="form-control" />
-      <Label layoutX="143.0" layoutY="341.0" prefHeight="18.0" prefWidth="206.0" text="Fütterungsdatum und -uhrzeit:" />
+      <TextField fx:id="feed_date_time" layoutX="142.0" layoutY="306.0" prefHeight="26.0" prefWidth="206.0" styleClass="form-control" />
+      <Label layoutX="144.0" layoutY="279.0" prefHeight="18.0" prefWidth="206.0" text="Fütterungsdatum und -uhrzeit:" />
       <ChoiceBox fx:id="animal_id" layoutX="141.0" layoutY="237.0" prefHeight="26.0" prefWidth="206.0" />
-      <ChoiceBox fx:id="keeper_id" layoutX="141.0" layoutY="304.0" prefHeight="26.0" prefWidth="206.0" />
-      <Label layoutX="141.0" layoutY="278.0" prefHeight="18.0" prefWidth="206.0" text="Tierpfleger:" />
+      <ChoiceBox fx:id="keeper_id" layoutX="141.0" layoutY="372.0" prefHeight="26.0" prefWidth="206.0" />
+      <Label fx:id="keeper" layoutX="141.0" layoutY="346.0" prefHeight="18.0" prefWidth="206.0" text="Tierpfleger:" />
       <Label layoutX="141.0" layoutY="76.0" prefHeight="18.0" prefWidth="206.0" text="Futter:" />
       <ChoiceBox fx:id="feed_id" layoutX="139.0" layoutY="101.0" prefHeight="26.0" prefWidth="206.0" />
       <TextField fx:id="feed_amount" layoutX="140.0" layoutY="171.0" prefHeight="26.0" prefWidth="206.0" styleClass="form-control" />

@@ -22,7 +22,7 @@
       <Label layoutX="143.0" layoutY="72.0" prefHeight="18.0" prefWidth="206.0" text="Pflegedatum:" />
       <ChoiceBox fx:id="animal_id" layoutX="142.0" layoutY="230.0" prefHeight="26.0" prefWidth="206.0" />
       <ChoiceBox fx:id="keeper_id" layoutX="142.0" layoutY="297.0" prefHeight="26.0" prefWidth="206.0" />
-      <Label layoutX="142.0" layoutY="271.0" prefHeight="18.0" prefWidth="206.0" text="Tierpfleger:" />
+      <Label fx:id="keeper" layoutX="142.0" layoutY="271.0" prefHeight="18.0" prefWidth="206.0" text="Tierpfleger:" />
       <Label layoutX="144.0" layoutY="142.0" prefHeight="18.0" prefWidth="206.0" text="Pflegetype:" />
       <ChoiceBox fx:id="care_type_id" layoutX="142.0" layoutY="167.0" prefHeight="26.0" prefWidth="206.0" />
    </children>

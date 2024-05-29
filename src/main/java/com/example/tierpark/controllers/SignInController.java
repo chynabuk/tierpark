@@ -63,6 +63,7 @@ public class SignInController {
         CurrentUser.setUser(User.builder()
                         .roleId(3)
                 .build());
+
         WindowUtil.openWindow((Stage) container_id.getScene().getWindow(), "animal-view.fxml");
     }
 

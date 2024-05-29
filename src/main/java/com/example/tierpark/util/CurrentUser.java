@@ -7,6 +7,7 @@ public class CurrentUser {
 
     public static void setUser(User user) {
         CurrentUser.user = user;
+        JdbcSQLServerConnection.changeConfiguration(user.getRoleId());
     }
 
     public static User getUser() {
