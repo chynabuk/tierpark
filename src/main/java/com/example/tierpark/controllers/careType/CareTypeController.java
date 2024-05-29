@@ -42,6 +42,7 @@ public class CareTypeController extends NavbarController {
     @FXML
     private void initialize() {
         careTypeService = new CareTypeService();
+        fileName = careTypeService.getTableName();
 
         // Load all data once
         careTypeList = FXCollections.observableArrayList(careTypeService.readAll());

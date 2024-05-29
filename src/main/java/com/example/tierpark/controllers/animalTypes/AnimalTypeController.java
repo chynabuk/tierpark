@@ -51,6 +51,8 @@ public class AnimalTypeController extends NavbarController {
     @FXML
     private void initialize() {
         service = new AnimalTypeService();
+        fileName = service.getTableName();
+
         animalFamilyService = new AnimalFamilyService();
 
         // Load all data once

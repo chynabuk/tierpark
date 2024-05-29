@@ -83,6 +83,7 @@ public class SignUpController {
                     .password(password_id.getText())
                     .genderId(gender.getId())
                     .roleId(1)
+                    .roleId(2)
                     .build();
             userService.insert(user);
             CurrentUser.setUser(user);

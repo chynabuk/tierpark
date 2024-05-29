@@ -44,6 +44,7 @@ public class BuildingController extends NavbarController {
     @FXML
     private void initialize() {
         buildingService = new BuildingService();
+        fileName = buildingService.getTableName();
 
         // Load all data once
         buildingList = FXCollections.observableArrayList(buildingService.readAll());

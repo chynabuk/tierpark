@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Feeds>
+    <Feed>
+        <ID>1</ID>
+        <Name>Fleisch</Name>
+        <Measure>kg</Measure>
+        <Price>5 €</Price>
+    </Feed>
+    <Feed>
+        <ID>2</ID>
+        <Name>Fisch</Name>
+        <Measure>kg</Measure>
+        <Price>3 €</Price>
+    </Feed>
+    <Feed>
+        <ID>3</ID>
+        <Name>Obst</Name>
+        <Measure>kg</Measure>
+        <Price>2 €</Price>
+    </Feed>
+</Feeds>

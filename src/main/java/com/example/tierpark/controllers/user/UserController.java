@@ -75,6 +75,8 @@ public class UserController extends NavbarController {
     @FXML
     private void initialize() {
         userService = new UserService();
+        fileName = userService.getTableName();
+
         roleService = new RoleService();
 
         // Load all data once

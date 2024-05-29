@@ -69,6 +69,8 @@ public class FeedAnimalController extends NavbarController {
     @FXML
     private void initialize(){
         service = new FeedAnimalService();
+        fileName = service.getTableName();
+
         feedService = new FeedService();
         userService = new UserService();
         animalService = new AnimalService();

@@ -38,7 +38,7 @@ public class ClassController extends NavbarController {
     @FXML
     private void initialize() {
         service = new AnimalClassService();
-
+        fileName = service.getTableName();
         // Load all data once
         classList = FXCollections.observableArrayList(service.readAll());
 

@@ -50,6 +50,7 @@ public class FeedController extends NavbarController {
     @FXML
     private void initialize() {
         feedService = new FeedService();
+        fileName = feedService.getTableName();
 
         // Load all data once
         feedList = FXCollections.observableArrayList(feedService.readAll());

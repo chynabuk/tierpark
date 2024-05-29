@@ -61,6 +61,7 @@ public class AnimalController extends NavbarController {
     @FXML
     private void initialize() {
         animalService = new AnimalService();
+        fileName = animalService.getTableName();
         animalTypeService = new AnimalTypeService();
         buildingService = new BuildingService();
 

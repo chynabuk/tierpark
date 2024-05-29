@@ -61,6 +61,8 @@ public class CareController extends NavbarController {
     @FXML
     private void initialize() {
         service = new CareService();
+        fileName = service.getTableName();
+
         userService = new UserService();
         careTypeService = new CareTypeService();
         animalService = new AnimalService();
