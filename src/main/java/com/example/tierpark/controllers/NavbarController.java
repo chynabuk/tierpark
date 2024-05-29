@@ -3,7 +3,15 @@ package com.example.tierpark.controllers;
 import com.example.tierpark.util.CurrentUser;
 import com.example.tierpark.util.WindowUtil;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.SplitPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -25,6 +33,20 @@ public abstract class NavbarController {
 
     @FXML
     private Menu nav_users;
+
+    @FXML
+    private Button createBtn;
+
+    @FXML
+    private Button updateBtn;
+
+
+    @FXML
+    private Button deleteBtn;
+
+
+    @FXML
+    private Button exportBtn;
 
     public void setStageToClose(Stage stage) {
         stageToClose = stage;
@@ -87,9 +109,37 @@ public abstract class NavbarController {
         WindowUtil.openWindowSignIn(stageToClose, "sign-in-view.fxml");
     }
 
+    @FXML
+    protected void exportToXML() {
+
+    }
+
+    private MenuBar findMenuBar(Node node) {
+        if (node == null) {
+            return null;
+        }
+        if (node instanceof MenuBar) {
+            return (MenuBar) node;
+        }
+        if (node.getParent() != null) {
+            return findMenuBar(node.getParent());
+        }
+        return null;
+    }
+
     protected void checkRole() {
         if (CurrentUser.getUser().getRoleId() == 3) {
-            
+            nav_users.setVisible(false);
+            nav_care.setVisible(false);
+            nav_feeds.setVisible(false);
+            createBtn.setManaged(false);
+            updateBtn.setManaged(false);
+            deleteBtn.setManaged(false);
+        } else if (CurrentUser.getUser().getRoleId() == 2) {
+            nav_users.setVisible(false);
+            nav_building.setVisible(false);
+            updateBtn.setVisible(false);
+            deleteBtn.setManaged(false);
         }
     }
 }
