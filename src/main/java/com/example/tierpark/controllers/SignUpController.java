@@ -7,6 +7,7 @@ import com.example.tierpark.entities.User;
 import com.example.tierpark.services.impl.UserService;
 import com.example.tierpark.util.CurrentUser;
 import com.example.tierpark.util.DateUtil;
+import com.example.tierpark.util.WindowUtil;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -66,7 +67,7 @@ public class SignUpController {
     }
 
     @FXML
-    private void signUpClicked() {
+    private void signUpClicked() throws IOException {
         if (isInputValid()) {
             Gender gender;
             if (gender_id.getValue().equals("Männlich")) {
@@ -85,8 +86,7 @@ public class SignUpController {
                     .build();
             userService.insert(user);
             CurrentUser.setUser(user);
-
-
+            WindowUtil.openWindow((Stage) container_id.getScene().getWindow(), "animal-view.fxml");
         }
     }
 

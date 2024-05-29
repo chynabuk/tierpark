@@ -57,4 +57,15 @@ public abstract class NavbarController {
     protected void showFeedAnimals() throws IOException{
         WindowUtil.openWindow(stageToClose, "feed-animal-view.fxml");
     }
+
+    @FXML
+    protected void showUsers() throws IOException {
+        WindowUtil.openWindow(stageToClose, "user-view.fxml");
+    }
+
+
+    @FXML
+    protected void exitClicked() {
+
+    }
 }

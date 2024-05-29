@@ -49,6 +49,7 @@ public class UserService extends CrudOperations<User> {
     public User build(ResultSet resultSet) throws SQLException {
         return User.builder()
                 .id(resultSet.getInt("id"))
+                .login(resultSet.getString("login"))
                 .name(resultSet.getString("name"))
                 .lastname(resultSet.getString("lastname"))
                 .birthDate(resultSet.getDate("birthdate"))

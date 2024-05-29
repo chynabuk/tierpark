@@ -53,8 +53,8 @@ public class SignInController {
     protected void clickedSignIn() throws IOException {
         User user = isInputValid();
         if (user != null) {
-            WindowUtil.openWindow((Stage) container_id.getScene().getWindow(), "animal-view.fxml");
             CurrentUser.setUser(user);
+            WindowUtil.openWindow((Stage) container_id.getScene().getWindow(), "animal-view.fxml");
         }
     }
 

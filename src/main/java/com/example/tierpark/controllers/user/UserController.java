@@ -126,7 +126,7 @@ public class UserController extends NavbarController {
 
     @FXML
     private void createClicked() {
-        if (WindowUtil.openWindowWithoutClosing("building-create.fxml")) {
+        if (WindowUtil.openWindowWithoutClosing("user-create.fxml")) {
             updateTable();
         }
     }
