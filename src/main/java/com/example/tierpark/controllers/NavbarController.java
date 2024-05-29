@@ -20,6 +20,8 @@ import java.io.IOException;
 public abstract class NavbarController {
     protected Stage stageToClose;
     protected String fileName;
+    protected Document document;
+    protected Element rootElement;
 
     public void setStageToClose(Stage stage) {
         stageToClose = stage;
@@ -70,30 +72,32 @@ public abstract class NavbarController {
         WindowUtil.openWindow(stageToClose, "feed-animal-view.fxml");
     }
 
-//    @FXML
-//    protected void exportToXML() {
-//        try {
-//            DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
-//            DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
-//            Document document = documentBuilder.newDocument();
-//
-//            setupXML();
-//
-//            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-//            Transformer transformer = transformerFactory.newTransformer();
-//            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-//            DOMSource domSource = new DOMSource(document);
-//            StreamResult streamResult = new StreamResult(new File(fileName));
-//
-//            transformer.transform(domSource, streamResult);
-//
-//            System.out.println("Done creating XML File");
-//        } catch (ParserConfigurationException | javax.xml.transform.TransformerException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    protected abstract void setupXML();
+    @FXML
+    protected void exportToXML() {
+        try {
+            DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
+            document = documentBuilder.newDocument();
+            rootElement = document.createElement(fileName);
+            document.appendChild(rootElement);
+
+            setupXML();
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            DOMSource domSource = new DOMSource(document);
+            StreamResult streamResult = new StreamResult(new File(fileName + ".xml"));
+
+            transformer.transform(domSource, streamResult);
+
+            System.out.println("File saved!");
+        } catch (ParserConfigurationException | javax.xml.transform.TransformerException e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected abstract void setupXML();
     @FXML
     protected void showUsers() throws IOException {
         WindowUtil.openWindow(stageToClose, "user-view.fxml");

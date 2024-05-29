@@ -16,6 +16,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import org.w3c.dom.Element;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -171,5 +172,41 @@ public class UserController extends NavbarController {
     private void refreshUserList() {
         userList.setAll(userService.readAll());
         table_id.refresh();
+    }
+
+    @Override
+    protected void setupXML() {
+        for (User user : userList) {
+            Element userElement = document.createElement("User");
+            rootElement.appendChild(userElement);
+
+            Element id = document.createElement("ID");
+            id.appendChild(document.createTextNode(String.valueOf(user.getId())));
+            userElement.appendChild(id);
+
+            Element login = document.createElement("Login");
+            login.appendChild(document.createTextNode(user.getLogin()));
+            userElement.appendChild(login);
+
+            Element name = document.createElement("Name");
+            name.appendChild(document.createTextNode(user.getName()));
+            userElement.appendChild(name);
+
+            Element lastname = document.createElement("Lastname");
+            lastname.appendChild(document.createTextNode(user.getLastname()));
+            userElement.appendChild(lastname);
+
+            Element birthdate = document.createElement("Birthdate");
+            birthdate.appendChild(document.createTextNode(DateUtil.format(user.getBirthDate())));
+            userElement.appendChild(birthdate);
+
+            Element gender = document.createElement("Gender");
+            gender.appendChild(document.createTextNode(user.getGenderId() == Gender.MAN.getId() ? Gender.MAN.toString() : Gender.WOMAN.toString()));
+            userElement.appendChild(gender);
+
+            Element role = document.createElement("Role");
+            role.appendChild(document.createTextNode(getRoleName(user.getRoleId())));
+            userElement.appendChild(role);
+        }
     }
 }

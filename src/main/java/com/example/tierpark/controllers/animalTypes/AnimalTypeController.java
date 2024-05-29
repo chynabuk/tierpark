@@ -15,6 +15,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import org.w3c.dom.Element;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -138,5 +139,25 @@ public class AnimalTypeController extends NavbarController {
     private void refreshTypeList() {
         typeList.setAll(service.readAll());
         table_id.refresh();
+    }
+
+    @Override
+    protected void setupXML() {
+        for (AnimalType animalType : typeList) {
+            Element typeElement = document.createElement("AnimalType");
+            rootElement.appendChild(typeElement);
+
+            Element id = document.createElement("ID");
+            id.appendChild(document.createTextNode(String.valueOf(animalType.getId())));
+            typeElement.appendChild(id);
+
+            Element name = document.createElement("Name");
+            name.appendChild(document.createTextNode(animalType.getName()));
+            typeElement.appendChild(name);
+
+            Element family = document.createElement("AnimalFamily");
+            family.appendChild(document.createTextNode(getAnimalFamilyName(animalType.getFamilyId())));
+            typeElement.appendChild(family);
+        }
     }
 }

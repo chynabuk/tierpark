@@ -18,6 +18,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import org.w3c.dom.Element;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -171,4 +172,35 @@ public class AnimalController extends NavbarController {
         table_id.refresh();
     }
 
+    @Override
+    protected void setupXML() {
+        for (Animal animal : animalList) {
+            Element animalElement = document.createElement("Animal");
+            rootElement.appendChild(animalElement);
+
+            Element id = document.createElement("ID");
+            id.appendChild(document.createTextNode(String.valueOf(animal.getId())));
+            animalElement.appendChild(id);
+
+            Element name = document.createElement("Name");
+            name.appendChild(document.createTextNode(animal.getName()));
+            animalElement.appendChild(name);
+
+            Element birthDate = document.createElement("BirthDate");
+            birthDate.appendChild(document.createTextNode(DateUtil.format(animal.getBirthdate())));
+            animalElement.appendChild(birthDate);
+
+            Element type = document.createElement("Type");
+            type.appendChild(document.createTextNode(getAnimalTypeName(animal.getAnimalTypeId())));
+            animalElement.appendChild(type);
+
+            Element building = document.createElement("Building");
+            building.appendChild(document.createTextNode(getBuildingName(animal.getBuildingId())));
+            animalElement.appendChild(building);
+
+            Element gender = document.createElement("Gender");
+            gender.appendChild(document.createTextNode(animal.getGender().toString()));
+            animalElement.appendChild(gender);
+        }
+    }
 }

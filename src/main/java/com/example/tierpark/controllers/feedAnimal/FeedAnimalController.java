@@ -20,6 +20,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+import org.w3c.dom.Element;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -186,5 +187,38 @@ public class FeedAnimalController extends NavbarController {
     private void refreshFeedAnimalList() {
         feedAnimalList.setAll(service.readAll());
         table_id.refresh();
+    }
+
+    @Override
+    protected void setupXML() {
+        for (FeedAnimal feedAnimal : feedAnimalList) {
+            Element feedAnimalElement = document.createElement("FeedAnimal");
+            rootElement.appendChild(feedAnimalElement);
+
+            Element id = document.createElement("ID");
+            id.appendChild(document.createTextNode(String.valueOf(feedAnimal.getId())));
+            feedAnimalElement.appendChild(id);
+
+            Element feed = document.createElement("Feed");
+            feed.appendChild(document.createTextNode(getFeedName(feedAnimal.getFeedId())));
+            feedAnimalElement.appendChild(feed);
+
+            Element feedAmount = document.createElement("FeedAmount");
+            feedAmount.appendChild(document.createTextNode(String.valueOf(feedAnimal.getFeedAmount())));
+            feedAnimalElement.appendChild(feedAmount);
+
+            Element animal = document.createElement("Animal");
+            animal.appendChild(document.createTextNode(getAnimalName(feedAnimal.getAnimalId())));
+            feedAnimalElement.appendChild(animal);
+
+            Element keeper = document.createElement("Keeper");
+            User keeperUser = getUser(feedAnimal.getKeeperId());
+            keeper.appendChild(document.createTextNode(keeperUser.getName() + " " + keeperUser.getLastname()));
+            feedAnimalElement.appendChild(keeper);
+
+            Element feedDateTime = document.createElement("FeedDateTime");
+            feedDateTime.appendChild(document.createTextNode(DateUtil.format(feedAnimal.getFeedDateTime())));
+            feedAnimalElement.appendChild(feedDateTime);
+        }
     }
 }

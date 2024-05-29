@@ -14,6 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import org.w3c.dom.Element;
 
 public class BuildingController extends NavbarController {
     @FXML
@@ -118,5 +119,25 @@ public class BuildingController extends NavbarController {
     private void refreshBuildingList() {
         buildingList.setAll(buildingService.readAll());
         building_table.refresh();
+    }
+
+    @Override
+    protected void setupXML() {
+        for (Building building : buildingList) {
+            Element buildingElement = document.createElement("Building");
+            rootElement.appendChild(buildingElement);
+
+            Element id = document.createElement("ID");
+            id.appendChild(document.createTextNode(String.valueOf(building.getId())));
+            buildingElement.appendChild(id);
+
+            Element name = document.createElement("Name");
+            name.appendChild(document.createTextNode(building.getName()));
+            buildingElement.appendChild(name);
+
+            Element builtDate = document.createElement("BuiltDate");
+            builtDate.appendChild(document.createTextNode(DateUtil.format(building.getBuiltDate())));
+            buildingElement.appendChild(builtDate);
+        }
     }
 }

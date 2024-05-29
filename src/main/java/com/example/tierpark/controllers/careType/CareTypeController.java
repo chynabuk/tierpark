@@ -13,6 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import org.w3c.dom.Element;
 
 public class CareTypeController extends NavbarController {
     @FXML
@@ -116,5 +117,25 @@ public class CareTypeController extends NavbarController {
     private void refreshCareTypeList() {
         careTypeList.setAll(careTypeService.readAll());
         table_id.refresh();
+    }
+
+    @Override
+    protected void setupXML() {
+        for (CareType careType : careTypeList) {
+            Element careTypeElement = document.createElement("CareType");
+            rootElement.appendChild(careTypeElement);
+
+            Element id = document.createElement("ID");
+            id.appendChild(document.createTextNode(String.valueOf(careType.getId())));
+            careTypeElement.appendChild(id);
+
+            Element name = document.createElement("Name");
+            name.appendChild(document.createTextNode(careType.getName()));
+            careTypeElement.appendChild(name);
+
+            Element description = document.createElement("Description");
+            description.appendChild(document.createTextNode(careType.getDescription()));
+            careTypeElement.appendChild(description);
+        }
     }
 }

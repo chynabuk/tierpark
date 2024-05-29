@@ -13,6 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import org.w3c.dom.Element;
 
 public class FeedController extends NavbarController {
 
@@ -127,5 +128,29 @@ public class FeedController extends NavbarController {
     private void refreshFeedList() {
         feedList.setAll(feedService.readAll());
         feeds_table.refresh();
+    }
+
+    @Override
+    protected void setupXML() {
+        for (Feed feed : feedList) {
+            Element feedElement = document.createElement("Feed");
+            rootElement.appendChild(feedElement);
+
+            Element id = document.createElement("ID");
+            id.appendChild(document.createTextNode(String.valueOf(feed.getId())));
+            feedElement.appendChild(id);
+
+            Element name = document.createElement("Name");
+            name.appendChild(document.createTextNode(feed.getName()));
+            feedElement.appendChild(name);
+
+            Element measure = document.createElement("Measure");
+            measure.appendChild(document.createTextNode(feed.getMeasure()));
+            feedElement.appendChild(measure);
+
+            Element price = document.createElement("Price");
+            price.appendChild(document.createTextNode(feed.getPricePerUnit() + " €"));
+            feedElement.appendChild(price);
+        }
     }
 }

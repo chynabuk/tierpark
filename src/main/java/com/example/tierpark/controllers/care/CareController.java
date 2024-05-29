@@ -18,6 +18,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import org.w3c.dom.Element;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -175,5 +176,34 @@ public class CareController extends NavbarController {
     private void refreshCareList() {
         careList.setAll(service.readAll());
         table_id.refresh();
+    }
+
+    @Override
+    protected void setupXML() {
+        for (Care care : careList) {
+            Element careElement = document.createElement("Care");
+            rootElement.appendChild(careElement);
+
+            Element id = document.createElement("ID");
+            id.appendChild(document.createTextNode(String.valueOf(care.getId())));
+            careElement.appendChild(id);
+
+            Element careType = document.createElement("CareType");
+            careType.appendChild(document.createTextNode(getCareTypeName(care.getCareTypeId())));
+            careElement.appendChild(careType);
+
+            Element done = document.createElement("Done");
+            done.appendChild(document.createTextNode(DateUtil.format(care.getDone())));
+            careElement.appendChild(done);
+
+            Element animal = document.createElement("Animal");
+            animal.appendChild(document.createTextNode(getAnimalName(care.getAnimalId())));
+            careElement.appendChild(animal);
+
+            Element keeper = document.createElement("Keeper");
+            User keeperUser = getUser(care.getKeeperId());
+            keeper.appendChild(document.createTextNode(keeperUser.getName() + " " + keeperUser.getLastname()));
+            careElement.appendChild(keeper);
+        }
     }
 }

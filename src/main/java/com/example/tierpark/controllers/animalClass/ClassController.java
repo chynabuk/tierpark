@@ -13,6 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import org.w3c.dom.Element;
 
 public class ClassController extends NavbarController {
 
@@ -109,5 +110,21 @@ public class ClassController extends NavbarController {
     private void refreshClassList() {
         classList.setAll(service.readAll());
         table_id.refresh();
+    }
+
+    @Override
+    protected void setupXML() {
+        for (AnimalClass animalClass : classList) {
+            Element classElement = document.createElement("AnimalClass");
+            rootElement.appendChild(classElement);
+
+            Element id = document.createElement("ID");
+            id.appendChild(document.createTextNode(String.valueOf(animalClass.getId())));
+            classElement.appendChild(id);
+
+            Element name = document.createElement("Name");
+            name.appendChild(document.createTextNode(animalClass.getName()));
+            classElement.appendChild(name);
+        }
     }
 }
