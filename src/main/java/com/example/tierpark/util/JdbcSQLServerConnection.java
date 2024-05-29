@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class JdbcSQLServerConnection {
-    private static final String SERVER = "KUBA\\DIGGER";
+    private static final String SERVER = "LESHA\\SQLEXPRESS";
     private static final String DB_URL = "jdbc:sqlserver://" + SERVER + ";databaseName=Tierpark;encrypt=false";
     private static final RoleEnum USER_VISITOR = RoleEnum.ADMIN;
     private static RoleEnum CURRENT_USER = USER_VISITOR;

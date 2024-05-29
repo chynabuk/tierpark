@@ -92,9 +92,9 @@ public class BuildingController extends NavbarController {
 
     @FXML
     private void editClicked() {
-//        if (noSelectedHandle() && WindowUtil.openWindowWithoutClosing("building-edit.fxml", feeds_table.getSelectionModel().getSelectedItem())) {
-//            updateTable();
-//        }
+        if (noSelectedHandle() && WindowUtil.openWindowWithoutClosing("building-edit.fxml", building_table.getSelectionModel().getSelectedItem())) {
+            updateTable();
+        }
     }
 
     @FXML

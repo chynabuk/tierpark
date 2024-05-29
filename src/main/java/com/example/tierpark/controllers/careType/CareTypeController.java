@@ -90,9 +90,9 @@ public class CareTypeController extends NavbarController {
 
     @FXML
     private void editClicked() {
-//        if (noSelectedHandle() && WindowUtil.openWindowWithoutClosing("feed-edit.fxml", feeds_table.getSelectionModel().getSelectedItem())) {
-//            updateTable();
-//        }
+        if (noSelectedHandle() && WindowUtil.openWindowWithoutClosing("care-type-edit.fxml", table_id.getSelectionModel().getSelectedItem())) {
+            updateTable();
+        }
     }
 
     @FXML
