@@ -156,4 +156,8 @@ public abstract class CrudOperations<DT>{
     public abstract void prepareStatementCreatingSetup(DT object, PreparedStatement statement) throws SQLException;
     public abstract void prepareStatementUpdatingSetup(DT object, PreparedStatement statement) throws SQLException;
 
+    public String getTableName(){
+        return tableName;
+    }
+
 }

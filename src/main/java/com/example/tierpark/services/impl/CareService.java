@@ -12,7 +12,7 @@ public class CareService extends CrudOperations<Care> {
         super(
                 "Care",
                 "INSERT INTO Care (done, care_type_id, keeper_id, animal_id) VALUES (?, ?, ?, ?)",
-                "UPDATE Care SET done=? WHERE id=?");
+                "UPDATE Care SET done=?, care_type_id=?, keeper_id=?, animal_id=? WHERE id=?");
     }
 
     @Override
@@ -36,7 +36,7 @@ public class CareService extends CrudOperations<Care> {
 
     @Override
     public void prepareStatementUpdatingSetup(Care object, PreparedStatement statement) throws SQLException {
-        statement.setDate(1, object.getDone());
-        statement.setInt(2, object.getId());
+        prepareStatementCreatingSetup(object, statement);
+        statement.setInt(5, object.getId());
     }
 }
