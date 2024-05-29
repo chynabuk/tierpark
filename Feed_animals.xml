@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Feed_animals>
+    <FeedAnimal>
+        <ID>3</ID>
+        <Feed>Fleisch</Feed>
+        <FeedAmount>22</FeedAmount>
+        <Animal>Flippy</Animal>
+        <Keeper>Kubanychbek2 Kushtarbekov23</Keeper>
+        <FeedDateTime>22.02.2023 22:00:00</FeedDateTime>
+    </FeedAnimal>
+</Feed_animals>

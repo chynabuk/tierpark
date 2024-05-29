@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Animal_types>
+    <AnimalType>
+        <ID>10</ID>
+        <Name>Lion</Name>
+        <AnimalFamily>Felidae</AnimalFamily>
+    </AnimalType>
+    <AnimalType>
+        <ID>11</ID>
+        <Name>Seal</Name>
+        <AnimalFamily>Phocidae</AnimalFamily>
+    </AnimalType>
+    <AnimalType>
+        <ID>12</ID>
+        <Name>Vulture</Name>
+        <AnimalFamily>Accipitridae</AnimalFamily>
+    </AnimalType>
+    <AnimalType>
+        <ID>13</ID>
+        <Name>Python</Name>
+        <AnimalFamily>Pythonidae</AnimalFamily>
+    </AnimalType>
+    <AnimalType>
+        <ID>14</ID>
+        <Name>Elephant</Name>
+        <AnimalFamily>Elephantidae</AnimalFamily>
+    </AnimalType>
+    <AnimalType>
+        <ID>15</ID>
+        <Name>Chimpanzee</Name>
+        <AnimalFamily>Hominidae</AnimalFamily>
+    </AnimalType>
+    <AnimalType>
+        <ID>16</ID>
+        <Name>Zebra</Name>
+        <AnimalFamily>Equidae</AnimalFamily>
+    </AnimalType>
+</Animal_types>

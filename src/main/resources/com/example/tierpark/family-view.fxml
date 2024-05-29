@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<SplitPane dividerPositions="0.6351621946335603" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="500.0" prefWidth="600.0" stylesheets="@../../../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tierpark.controllers.animalFamily.FamilyController">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="292.0" prefWidth="598.0">
+         <children>
+            <TableView fx:id="table_id" layoutX="12.0" layoutY="78.0" prefHeight="227.0" prefWidth="574.0">
+               <columns>
+                  <TableColumn fx:id="col_id" prefWidth="33.60000705718994" text="#" />
+                  <TableColumn fx:id="col_name" minWidth="8.0" prefWidth="284.0000114440918" text="Name" />
+                  <TableColumn fx:id="col_class" prefWidth="252.0" text="Tierklasse" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+            <Label layoutX="12.0" layoutY="45.0" styleClass="h4" text="Tierfamilien" />
+             <MenuBar layoutY="1.0" prefHeight="26.0" prefWidth="598.0">
+                 <menus>
+                     <Menu fx:id="nav_animals" mnemonicParsing="false" text="Tiere">
+                         <items>
+                             <MenuItem mnemonicParsing="false" onAction="#showAnimals" text="Tiere" />
+                             <MenuItem mnemonicParsing="false" onAction="#showAnimalTypes" text="Tiertypen" />
+                             <MenuItem mnemonicParsing="false" onAction="#showAnimalFamilies" text="Tierfamilien" />
+                             <MenuItem mnemonicParsing="false" onAction="#showAnimalClasses" text="Tierklassen" />
+                         </items></Menu>
+                     <Menu fx:id="nav_feeds" mnemonicParsing="false" text="Füttern">
+                         <items>
+                             <MenuItem mnemonicParsing="false" onAction="#showFeeds" text="Füttern zeigen" />
+                             <MenuItem mnemonicParsing="false" onAction="#showFeedAnimals" text="Tierfüttern" />
+                         </items></Menu>
+                     <Menu fx:id="nav_care" mnemonicParsing="false" text="Pflegen">
+                         <items>
+                             <MenuItem mnemonicParsing="false" onAction="#showCareTypes" text="Pflegetypen zeigen" />
+                             <MenuItem mnemonicParsing="false" onAction="#showCare" text="Pflegen" />
+                         </items>
+                     </Menu>
+                     <Menu fx:id="nav_building" mnemonicParsing="false" text="Gebäude">
+                         <items>
+                             <MenuItem mnemonicParsing="false" onAction="#showBuildings" text="Gebäude zeigen" />
+                         </items>
+                     </Menu>
+                     <Menu fx:id="nav_users" mnemonicParsing="false" text="Benutzer">
+                         <items>
+                             <MenuItem mnemonicParsing="false" onAction="#showUsers" text="Benutzer zeigen" />
+                         </items>
+                     </Menu>
+                 </menus>
+             </MenuBar>
+             <Button layoutX="505.0" layoutY="-4.0" mnemonicParsing="false" onAction="#exitClicked" prefHeight="26.0" prefWidth="93.0" text="Ausloggen">
+                 <styleClass>
+                     <String fx:value="btn" />
+                     <String fx:value="btn-danger" />
+                 </styleClass>
+             </Button>
+         </children>
+      </AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="194.0" prefWidth="598.0">
+         <children>
+            <GridPane layoutX="35.0" layoutY="9.0" prefHeight="99.0" prefWidth="527.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="272.0" text="ID:">
+                     <styleClass>
+                        <String fx:value="px-3" />
+                        <String fx:value="b" />
+                        <String fx:value="h5" />
+                     </styleClass>
+                  </Label>
+                  <Label fx:id="label_id" prefHeight="18.0" prefWidth="372.0" GridPane.columnIndex="1">
+                     <styleClass>
+                        <String fx:value="px-3" />
+                        <String fx:value="h5" />
+                     </styleClass>
+                  </Label>
+                  <Label fx:id="label_name" prefHeight="18.0" prefWidth="348.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <styleClass>
+                        <String fx:value="px-3" />
+                        <String fx:value="h5" />
+                     </styleClass>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="283.0" text="Name:" GridPane.rowIndex="1">
+                     <styleClass>
+                        <String fx:value="px-3" />
+                        <String fx:value="b" />
+                        <String fx:value="h5" />
+                     </styleClass>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="283.0" text="Tierklasse:" GridPane.rowIndex="2">
+                     <styleClass>
+                        <String fx:value="px-3" />
+                        <String fx:value="b" />
+                        <String fx:value="h5" />
+                     </styleClass>
+                  </Label>
+                  <Label fx:id="label_class" layoutX="274.0" layoutY="47.0" prefHeight="18.0" prefWidth="348.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <styleClass>
+                        <String fx:value="px-3" />
+                        <String fx:value="h5" />
+                     </styleClass>
+                  </Label>
+               </children>
+            </GridPane>
+            <HBox alignment="CENTER" layoutX="35.0" layoutY="128.0" prefHeight="40.0" prefWidth="527.0" spacing="20.0">
+               <children>
+                  <Button fx:id="createBtn" mnemonicParsing="false" onAction="#createClicked" prefHeight="26.0" prefWidth="150.0" text="Neue anlegen">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-success" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="updateBtn" mnemonicParsing="false" onAction="#editClicked" prefHeight="26.0" prefWidth="150.0" text="Bearbeiten">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-warning" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#deleteClicked" prefHeight="26.0" prefWidth="150.0" text="Löschen">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-danger" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="exportBtn" layoutX="28.0" layoutY="17.0" mnemonicParsing="false" onAction="#exportToXML" prefHeight="26.0" prefWidth="150.0" text="Export to XML">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-success" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+  </items>
+</SplitPane>

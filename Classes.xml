@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Classes>
+    <AnimalClass>
+        <ID>4</ID>
+        <Name>Mammalia</Name>
+    </AnimalClass>
+    <AnimalClass>
+        <ID>5</ID>
+        <Name>Reptilia</Name>
+    </AnimalClass>
+    <AnimalClass>
+        <ID>6</ID>
+        <Name>Aves</Name>
+    </AnimalClass>
+</Classes>

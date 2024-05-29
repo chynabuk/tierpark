@@ -1,11 +1,13 @@
 package com.example.tierpark.services.impl;
 
+import com.example.tierpark.entities.Animal;
 import com.example.tierpark.entities.Feed;
 import com.example.tierpark.services.CrudOperations;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class FeedService extends CrudOperations<Feed> {
     public FeedService() {

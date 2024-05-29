@@ -1,13 +1,15 @@
 package com.example.tierpark.util;
+import com.example.tierpark.entities.RoleEnum;
+
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class JdbcSQLServerConnection {
-    private static final String SERVER = "Kuba\\DIGGER";
+    private static final String SERVER = "KUBA\\DIGGER";
     private static final String DB_URL = "jdbc:sqlserver://" + SERVER + ";databaseName=Tierpark;encrypt=false";
-    private static final String USER = "sa";
+    private static final RoleEnum USER_VISITOR = RoleEnum.ADMIN;
+    private static RoleEnum CURRENT_USER = USER_VISITOR;
     private static final String PASSWORD = "1234";
     private static Connection connection;
 
@@ -15,12 +17,19 @@ public class JdbcSQLServerConnection {
         connection = null;
 
         try {
-            connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            connection = DriverManager.getConnection(DB_URL, CURRENT_USER.toString(), PASSWORD);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
 
         return connection;
+    }
+
+    public static void changeConfiguration(int roleId){
+        RoleEnum role = RoleEnum.getRoleById(roleId);
+        if (!CURRENT_USER.equals(role)){
+            CURRENT_USER = role;
+        }
     }
 
     public static void close(){

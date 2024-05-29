@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Care_types>
+    <CareType>
+        <ID>1</ID>
+        <Name>Gesundheitscheck</Name>
+        <Description>Regelmäßige Gesundheitsuntersuchung</Description>
+    </CareType>
+    <CareType>
+        <ID>2</ID>
+        <Name>Fellpflege</Name>
+        <Description>Reinigung und Pflege des Fells</Description>
+    </CareType>
+    <CareType>
+        <ID>3</ID>
+        <Name>Training</Name>
+        <Description>Verhaltens- und Gehorsamstraining</Description>
+    </CareType>
+</Care_types>
