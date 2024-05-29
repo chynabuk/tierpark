@@ -90,13 +90,23 @@ public class UserController extends NavbarController {
                 (observable, oldValue, newValue) -> showDetails(newValue));
     }
 
-    private void showDetails(User building) {
-        if (building != null) {
-            label_id.setText(building.getId() + "");
-            label_name.setText(building.getName());
+    private void showDetails(User user) {
+        if (user != null) {
+            label_id.setText(user.getId() + "");
+            label_login.setText(user.getLogin());
+            label_birthdate.setText(DateUtil.format(user.getBirthDate()));
+            label_sex.setText(user.getGenderId() == Gender.MAN.getId() ? Gender.MAN.toString() : Gender.WOMAN.toString());
+            label_name.setText(user.getName());
+            label_lastname.setText(user.getLastname());
+            label_role.setText(roleService.readById(user.getRoleId()).getName());
         } else {
             label_id.setText("");
+            label_login.setText("");
+            label_birthdate.setText("");
+            label_sex.setText("");
             label_name.setText("");
+            label_lastname.setText("");
+            label_role.setText("");
         }
     }
 
@@ -123,9 +133,9 @@ public class UserController extends NavbarController {
 
     @FXML
     private void editClicked() {
-//        if (noSelectedHandle() && WindowUtil.openWindowWithoutClosing("building-edit.fxml", table_id.getSelectionModel().getSelectedItem())) {
-//            updateTable();
-//        }
+        if (noSelectedHandle() && WindowUtil.openWindowWithoutClosing("user-edit.fxml", table_id.getSelectionModel().getSelectedItem())) {
+            updateTable();
+        }
     }
 
     @FXML

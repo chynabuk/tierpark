@@ -11,6 +11,7 @@ import com.example.tierpark.controllers.care.CareUpdateController;
 import com.example.tierpark.controllers.careType.CareTypeUpdateController;
 import com.example.tierpark.controllers.feed.FeedUpdateController;
 import com.example.tierpark.controllers.feedAnimal.FeedAnimalUpdateController;
+import com.example.tierpark.controllers.user.UserUpdateController;
 import com.example.tierpark.entities.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -226,6 +227,26 @@ public class WindowUtil {
             stage.initModality(Modality.APPLICATION_MODAL);
             BuildingUpdateController controller = fxmlLoader.getController();
             controller.setFields(building);
+            stage.setScene(scene);
+            stage.showAndWait();
+            return true;
+        } catch (IOException exception) {
+            System.out.println(exception.getMessage());
+            return false;
+        }
+    }
+
+    public static boolean openWindowWithoutClosing(String pathToFxml, User user) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource(pathToFxml));
+            Stage stage = new Stage();
+            Scene scene = new Scene(fxmlLoader.load());
+            scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
+            stage.setTitle("Tierpark");
+            stage.getIcons().add(new Image(WindowUtil.class.getResourceAsStream("/images/zoo_logo.png")));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            UserUpdateController controller = fxmlLoader.getController();
+            controller.setFields(user);
             stage.setScene(scene);
             stage.showAndWait();
             return true;
