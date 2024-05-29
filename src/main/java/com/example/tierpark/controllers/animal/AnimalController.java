@@ -110,9 +110,9 @@ public class AnimalController extends NavbarController {
 
     @FXML
     private void editClicked() {
-//        if (noSelectedHandle() && WindowUtil.openWindowWithoutClosing("animal-type-edit.fxml", table_id.getSelectionModel().getSelectedItem())) {
-//            updateTable();
-//        }
+        if (noSelectedHandle() && WindowUtil.openWindowWithoutClosing("animal-edit.fxml", table_id.getSelectionModel().getSelectedItem())) {
+            updateTable();
+        }
     }
 
     @FXML

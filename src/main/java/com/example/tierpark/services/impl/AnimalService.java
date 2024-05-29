@@ -13,7 +13,7 @@ public class AnimalService extends CrudOperations<Animal> {
         super(
                 "Animals",
                 "INSERT INTO Animals (name, birthdate, animal_type_id, building_id, gender_id) VALUES (?, ?, ?, ?, ?)",
-                "UPDATE Animals SET name=?, birthdate=?");
+                "UPDATE Animals SET name=?, birthdate=?, animal_type_id=?, building_id=?, gender_id=? where id=?");
     }
 
     @Override
@@ -39,6 +39,8 @@ public class AnimalService extends CrudOperations<Animal> {
 
     @Override
     public void prepareStatementUpdatingSetup(Animal object, PreparedStatement statement) throws SQLException {
+        prepareStatementCreatingSetup(object, statement);
+        statement.setInt(6, object.getId());
 
     }
 }

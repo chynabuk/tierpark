@@ -127,6 +127,9 @@ public class FeedAnimalController extends NavbarController {
 
     @FXML
     private void editClicked() {
+        if (noSelectedHandle() && WindowUtil.openWindowWithoutClosing("feed-animal-edit.fxml", table_id.getSelectionModel().getSelectedItem())) {
+            updateTable();
+        }
     }
 
     @FXML

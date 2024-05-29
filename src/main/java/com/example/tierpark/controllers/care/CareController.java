@@ -114,6 +114,9 @@ public class CareController extends NavbarController {
 
     @FXML
     private void editClicked() {
+        if (noSelectedHandle() && WindowUtil.openWindowWithoutClosing("care-edit.fxml", table_id.getSelectionModel().getSelectedItem())) {
+            updateTable();
+        }
     }
 
     @FXML
