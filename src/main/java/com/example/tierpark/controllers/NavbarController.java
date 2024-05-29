@@ -94,4 +94,14 @@ public abstract class NavbarController {
 //    }
 //
 //    protected abstract void setupXML();
+    @FXML
+    protected void showUsers() throws IOException {
+        WindowUtil.openWindow(stageToClose, "user-view.fxml");
+    }
+
+
+    @FXML
+    protected void exitClicked() {
+
+    }
 }

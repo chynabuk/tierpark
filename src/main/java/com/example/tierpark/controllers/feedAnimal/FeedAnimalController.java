@@ -1,8 +1,6 @@
 package com.example.tierpark.controllers.feedAnimal;
 
 import com.example.tierpark.controllers.NavbarController;
-import com.example.tierpark.entities.Care;
-import com.example.tierpark.entities.Feed;
 import com.example.tierpark.entities.FeedAnimal;
 import com.example.tierpark.entities.User;
 import com.example.tierpark.services.impl.AnimalService;
@@ -22,6 +20,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class FeedAnimalController extends NavbarController {
@@ -54,10 +55,15 @@ public class FeedAnimalController extends NavbarController {
     @FXML
     TableView<FeedAnimal> table_id;
 
-    private FeedAnimalService service;
-    private FeedService feedService;
-    private UserService userService;
-    private AnimalService animalService;
+    FeedAnimalService service;
+    FeedService feedService;
+    UserService userService;
+    AnimalService animalService;
+    ObservableList<FeedAnimal> feedAnimalList;
+
+    Map<Integer, String> feedCache = new HashMap<>();
+    Map<Integer, String> animalCache = new HashMap<>();
+    Map<Integer, User> userCache = new HashMap<>();
 
     @FXML
     private void initialize(){
@@ -66,42 +72,76 @@ public class FeedAnimalController extends NavbarController {
         userService = new UserService();
         animalService = new AnimalService();
 
+        // Load all data once
+        feedAnimalList = FXCollections.observableArrayList(service.readAll());
+        loadFeeds();
+        loadAnimals();
+        loadUsers();
+
         col_id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
-        col_feed.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(feedService.readById(cellData.getValue().getFeedId()).getName()));
+        col_feed.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(getFeedName(cellData.getValue().getFeedId())));
         col_feed_amount.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getFeedAmount()));
-        col_animal.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(animalService.readById(cellData.getValue().getAnimalId()).getName()));
+        col_animal.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(getAnimalName(cellData.getValue().getAnimalId())));
         col_keeper.setCellValueFactory(cellData -> {
-            User keeper = userService.readById(cellData.getValue().getKeeperId());
+            User keeper = getUser(cellData.getValue().getKeeperId());
             return new ReadOnlyStringWrapper(keeper.getName() + " " + keeper.getLastname());
         });
         col_feed_date_time.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(DateUtil.format(cellData.getValue().getFeedDateTime())));
+
         updateTable();
     }
 
+    private void loadFeeds() {
+        feedService.readAll().forEach(feed -> feedCache.put(feed.getId(), feed.getName()));
+    }
+
+    private void loadAnimals() {
+        animalService.readAll().forEach(animal -> animalCache.put(animal.getId(), animal.getName()));
+    }
+
+    private void loadUsers() {
+        userService.readAll().forEach(user -> userCache.put(user.getId(), user));
+    }
+
+    private String getFeedName(int feedId) {
+        return feedCache.getOrDefault(feedId, "Unknown");
+    }
+
+    private String getAnimalName(int animalId) {
+        return animalCache.getOrDefault(animalId, "Unknown");
+    }
+
+    private User getUser(int userId) {
+        return userCache.getOrDefault(userId, new User());
+    }
+
     private void updateTable() {
-        ObservableList<FeedAnimal> entities = FXCollections.observableArrayList(service.readAll());
-        table_id.setItems(entities);
+        table_id.setItems(feedAnimalList);
         table_id.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showDetails(newValue));
     }
 
     private void showDetails(FeedAnimal feedAnimal) {
         if (feedAnimal != null) {
-            label_id.setText(feedAnimal.getId() + "");
-            label_feed.setText(feedService.readById(feedAnimal.getFeedId()).getName());
-            label_feed_amount.setText(feedAnimal.getFeedAmount() + "");
-            label_animal.setText(animalService.readById(feedAnimal.getAnimalId()).getName());
-            User keeper = userService.readById(feedAnimal.getKeeperId());
+            label_id.setText(String.valueOf(feedAnimal.getId()));
+            label_feed.setText(getFeedName(feedAnimal.getFeedId()));
+            label_feed_amount.setText(String.valueOf(feedAnimal.getFeedAmount()));
+            label_animal.setText(getAnimalName(feedAnimal.getAnimalId()));
+            User keeper = getUser(feedAnimal.getKeeperId());
             label_keeper.setText(keeper.getName() + " " + keeper.getLastname());
             label_feed_date_time.setText(DateUtil.format(feedAnimal.getFeedDateTime()));
         } else {
-            label_id.setText("");
-            label_feed.setText("");
-            label_feed_amount.setText("");
-            label_animal.setText("");
-            label_keeper.setText("");
-            label_feed_date_time.setText("");
+            clearLabels();
         }
+    }
+
+    private void clearLabels() {
+        label_id.setText("");
+        label_feed.setText("");
+        label_feed_amount.setText("");
+        label_animal.setText("");
+        label_keeper.setText("");
+        label_feed_date_time.setText("");
     }
 
     private boolean noSelectedHandle() {
@@ -109,26 +149,29 @@ public class FeedAnimalController extends NavbarController {
         if (selectedIndex >= 0) {
             return true;
         }
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Keine Auswahl");
-        alert.setHeaderText("Kein Tierfutter ausgewählt");
-        alert.setContentText("Bitte wählen Sie ein Tierfutter in der Tabelle aus.");
-
-        alert.showAndWait();
+        showAlert("Keine Auswahl", "Kein Tierfutter ausgewählt", "Bitte wählen Sie ein Tierfutter in der Tabelle aus.");
         return false;
+    }
+
+    private void showAlert(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
     @FXML
     private void createClicked() {
         if (WindowUtil.openWindowWithoutClosing("feed-animal-create.fxml")) {
-            updateTable();
+            refreshFeedAnimalList();
         }
     }
 
     @FXML
     private void editClicked() {
         if (noSelectedHandle() && WindowUtil.openWindowWithoutClosing("feed-animal-edit.fxml", table_id.getSelectionModel().getSelectedItem())) {
-            updateTable();
+            refreshFeedAnimalList();
         }
     }
 
@@ -136,8 +179,12 @@ public class FeedAnimalController extends NavbarController {
     private void deleteClicked() {
         if (noSelectedHandle()) {
             service.delete(table_id.getSelectionModel().getSelectedItem().getId());
-            updateTable();
+            refreshFeedAnimalList();
         }
     }
 
+    private void refreshFeedAnimalList() {
+        feedAnimalList.setAll(service.readAll());
+        table_id.refresh();
+    }
 }

@@ -30,29 +30,44 @@
                </columnResizePolicy>
             </TableView>
             <Label layoutX="12.0" layoutY="45.0" styleClass="h4" text="Tiertypen" />
-            <MenuBar layoutY="1.0" prefHeight="26.0" prefWidth="598.0">
-              <menus>
-                <Menu mnemonicParsing="false" text="Tiere">
-                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#showAnimals" text="Tiere" />
-                        <MenuItem mnemonicParsing="false" onAction="#showAnimalTypes" text="Tiertypen" />
-                        <MenuItem mnemonicParsing="false" onAction="#showAnimalFamilies" text="Tierfamilien" />
-                        <MenuItem mnemonicParsing="false" onAction="#showAnimalClasses" text="Tierklassen" />
-                        <MenuItem mnemonicParsing="false" text="Tierfüttern" />
-                        <MenuItem mnemonicParsing="false" text="Pflegen" />
-                     </items></Menu>
-                <Menu mnemonicParsing="false" onAction="#showFeeds" text="Füttern">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="Füttern zeigen" />
-                     </items></Menu>
-                <Menu mnemonicParsing="false" text="Pflegetypen" />
-                  <Menu mnemonicParsing="false" onAction="#showBuildings" text="Gebäude">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="Gebäude zeigen" />
-                     </items>
-                  </Menu>
-              </menus>
-            </MenuBar>
+             <MenuBar layoutY="1.0" prefHeight="26.0" prefWidth="598.0">
+                 <menus>
+                     <Menu mnemonicParsing="false" text="Tiere">
+                         <items>
+                             <MenuItem mnemonicParsing="false" onAction="#showAnimals" text="Tiere" />
+                             <MenuItem mnemonicParsing="false" onAction="#showAnimalTypes" text="Tiertypen" />
+                             <MenuItem mnemonicParsing="false" onAction="#showAnimalFamilies" text="Tierfamilien" />
+                             <MenuItem mnemonicParsing="false" onAction="#showAnimalClasses" text="Tierklassen" />
+                         </items></Menu>
+                     <Menu mnemonicParsing="false" text="Füttern">
+                         <items>
+                             <MenuItem mnemonicParsing="false" onAction="#showFeeds" text="Füttern zeigen" />
+                             <MenuItem mnemonicParsing="false" onAction="#showFeedAnimals" text="Tierfüttern" />
+                         </items></Menu>
+                     <Menu mnemonicParsing="false" text="Pflegen">
+                         <items>
+                             <MenuItem mnemonicParsing="false" onAction="#showCareTypes" text="Pflegetypen zeigen" />
+                             <MenuItem mnemonicParsing="false" onAction="#showCare" text="Pflegen" />
+                         </items>
+                     </Menu>
+                     <Menu mnemonicParsing="false" text="Gebäude">
+                         <items>
+                             <MenuItem mnemonicParsing="false" onAction="#showBuildings" text="Gebäude zeigen" />
+                         </items>
+                     </Menu>
+                     <Menu mnemonicParsing="false" text="Benutzer">
+                         <items>
+                             <MenuItem mnemonicParsing="false" onAction="#showUsers" text="Benutzer zeigen" />
+                         </items>
+                     </Menu>
+                 </menus>
+             </MenuBar>
+             <Button layoutX="505.0" layoutY="-4.0" mnemonicParsing="false" onAction="#exitClicked" prefHeight="26.0" prefWidth="93.0" text="Ausloggen">
+                 <styleClass>
+                     <String fx:value="btn" />
+                     <String fx:value="btn-danger" />
+                 </styleClass>
+             </Button>
          </children>
       </AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="194.0" prefWidth="598.0">

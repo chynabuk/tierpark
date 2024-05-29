@@ -23,7 +23,6 @@ public class CareTypeController extends NavbarController {
     @FXML
     private Label label_description;
 
-
     @FXML
     private TableColumn<CareType, Integer> col_id;
 
@@ -37,34 +36,42 @@ public class CareTypeController extends NavbarController {
     private TableView<CareType> table_id;
 
     private CareTypeService careTypeService;
-
+    private ObservableList<CareType> careTypeList;
 
     @FXML
     private void initialize() {
         careTypeService = new CareTypeService();
-        col_id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(cellData.getValue().getId()));
+
+        // Load all data once
+        careTypeList = FXCollections.observableArrayList(careTypeService.readAll());
+
+        col_id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
         col_name.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getName()));
         col_description.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getDescription()));
+
         updateTable();
     }
 
     private void updateTable() {
-        ObservableList<CareType> careTypes = FXCollections.observableArrayList(careTypeService.readAll());
-        table_id.setItems(careTypes);
+        table_id.setItems(careTypeList);
         table_id.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showDetails(newValue));
     }
 
     private void showDetails(CareType careType) {
         if (careType != null) {
-            label_id.setText(careType.getId() + "");
+            label_id.setText(String.valueOf(careType.getId()));
             label_name.setText(careType.getName());
             label_description.setText(careType.getDescription());
         } else {
-            label_id.setText("");
-            label_name.setText("");
-            label_description.setText("");
+            clearLabels();
         }
+    }
+
+    private void clearLabels() {
+        label_id.setText("");
+        label_name.setText("");
+        label_description.setText("");
     }
 
     private boolean noSelectedHandle() {
@@ -72,26 +79,29 @@ public class CareTypeController extends NavbarController {
         if (selectedIndex >= 0) {
             return true;
         }
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Keine Auswahl");
-        alert.setHeaderText("Kein Pflegetyp ausgewählt");
-        alert.setContentText("Bitte wählen Sie einen Pflegetyp in der Tabelle aus.");
-
-        alert.showAndWait();
+        showAlert("Keine Auswahl", "Kein Pflegetyp ausgewählt", "Bitte wählen Sie einen Pflegetyp in der Tabelle aus.");
         return false;
+    }
+
+    private void showAlert(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
     @FXML
     private void createClicked() {
         if (WindowUtil.openWindowWithoutClosing("care-type-create.fxml")) {
-            updateTable();
+            refreshCareTypeList();
         }
     }
 
     @FXML
     private void editClicked() {
         if (noSelectedHandle() && WindowUtil.openWindowWithoutClosing("care-type-edit.fxml", table_id.getSelectionModel().getSelectedItem())) {
-            updateTable();
+            refreshCareTypeList();
         }
     }
 
@@ -99,7 +109,12 @@ public class CareTypeController extends NavbarController {
     private void deleteClicked() {
         if (noSelectedHandle()) {
             careTypeService.delete(table_id.getSelectionModel().getSelectedItem().getId());
-            updateTable();
+            refreshCareTypeList();
         }
+    }
+
+    private void refreshCareTypeList() {
+        careTypeList.setAll(careTypeService.readAll());
+        table_id.refresh();
     }
 }

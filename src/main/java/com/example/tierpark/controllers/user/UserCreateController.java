@@ -1,30 +1,16 @@
-package com.example.tierpark.controllers;
+package com.example.tierpark.controllers.user;
 
-import com.example.tierpark.StartApplication;
 import com.example.tierpark.entities.Gender;
-import com.example.tierpark.entities.Role;
 import com.example.tierpark.entities.User;
 import com.example.tierpark.services.impl.UserService;
-import com.example.tierpark.util.CurrentUser;
 import com.example.tierpark.util.DateUtil;
-import com.example.tierpark.util.WindowUtil;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import org.kordamp.bootstrapfx.BootstrapFX;
 
-import java.io.IOException;
-
-public class SignUpController {
-    @FXML
-    private AnchorPane container_id;
+public class UserCreateController {
 
     @FXML
     private TextField login_id;
@@ -54,20 +40,7 @@ public class SignUpController {
     }
 
     @FXML
-    protected void singInClicked() throws IOException {
-        ((Stage)container_id.getScene().getWindow()).close();
-        FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("sign-in-view.fxml"));
-        Stage stage = new Stage();
-        Scene scene = new Scene(fxmlLoader.load());
-        scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
-        stage.setTitle("Tierpark");
-        stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/zoo_logo.png")));
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    @FXML
-    private void signUpClicked() throws IOException {
+    private void createClicked() {
         if (isInputValid()) {
             Gender gender;
             if (gender_id.getValue().equals("Männlich")) {
@@ -82,11 +55,10 @@ public class SignUpController {
                     .birthDate(DateUtil.parse(birthday_id.getText()))
                     .password(password_id.getText())
                     .genderId(gender.getId())
-                    .roleId(1)
+                    .roleId(2)
                     .build();
             userService.insert(user);
-            CurrentUser.setUser(user);
-            WindowUtil.openWindow((Stage) container_id.getScene().getWindow(), "animal-view.fxml");
+            ((Stage) name_id.getScene().getWindow()).close();
         }
     }
 

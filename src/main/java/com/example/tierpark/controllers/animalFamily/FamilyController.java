@@ -15,10 +15,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.stage.Stage;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class FamilyController extends NavbarController {
-
 
     @FXML
     private Label label_id;
@@ -28,7 +29,6 @@ public class FamilyController extends NavbarController {
 
     @FXML
     private Label label_class;
-
 
     @FXML
     private TableColumn<AnimalFamily, Integer> col_id;
@@ -44,34 +44,56 @@ public class FamilyController extends NavbarController {
 
     private AnimalFamilyService service;
     private AnimalClassService animalClassService;
+    private ObservableList<AnimalFamily> familyList;
+    private Map<Integer, AnimalClass> animalClassCache = new HashMap<>();
 
     @FXML
     private void initialize() {
         service = new AnimalFamilyService();
         animalClassService = new AnimalClassService();
-        col_id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(cellData.getValue().getId()));
+
+        // Load all data once
+        familyList = FXCollections.observableArrayList(service.readAll());
+        loadAnimalClasses();
+
+        col_id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
         col_name.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getName()));
-        col_class.setCellValueFactory(cellDate -> new ReadOnlyStringWrapper(animalClassService.readById(cellDate.getValue().getClassId()).getName()));
+        col_class.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(getAnimalClassName(cellData.getValue().getClassId())));
+
         updateTable();
     }
 
+    private void loadAnimalClasses() {
+        for (AnimalClass animalClass : animalClassService.readAll()) {
+            animalClassCache.put(animalClass.getId(), animalClass);
+        }
+    }
+
+    private String getAnimalClassName(int classId) {
+        AnimalClass animalClass = animalClassCache.get(classId);
+        return (animalClass != null) ? animalClass.getName() : "Unknown";
+    }
+
     private void updateTable() {
-        ObservableList<AnimalFamily> entities = FXCollections.observableArrayList(service.readAll());
-        table_id.setItems(entities);
+        table_id.setItems(familyList);
         table_id.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showDetails(newValue));
     }
 
     private void showDetails(AnimalFamily animalFamily) {
         if (animalFamily != null) {
-            label_id.setText(animalFamily.getId() + "");
+            label_id.setText(String.valueOf(animalFamily.getId()));
             label_name.setText(animalFamily.getName());
-            label_class.setText(animalClassService.readById(animalFamily.getClassId()).getName());
+            label_class.setText(getAnimalClassName(animalFamily.getClassId()));
         } else {
-            label_id.setText("");
-            label_name.setText("");
-            label_class.setText("");
+            clearLabels();
         }
+    }
+
+    private void clearLabels() {
+        label_id.setText("");
+        label_name.setText("");
+        label_class.setText("");
     }
 
     private boolean noSelectedHandle() {
@@ -79,26 +101,29 @@ public class FamilyController extends NavbarController {
         if (selectedIndex >= 0) {
             return true;
         }
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Keine Auswahl");
-        alert.setHeaderText("Keine Tierfamilie ausgewählt");
-        alert.setContentText("Bitte wählen Sie eine Tierfamilie in der Tabelle aus.");
-
-        alert.showAndWait();
+        showAlert("Keine Auswahl", "Keine Tierfamilie ausgewählt", "Bitte wählen Sie eine Tierfamilie in der Tabelle aus.");
         return false;
+    }
+
+    private void showAlert(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
     @FXML
     private void createClicked() {
         if (WindowUtil.openWindowWithoutClosing("family-create.fxml")) {
-            updateTable();
+            refreshFamilyList();
         }
     }
 
     @FXML
     private void editClicked() {
         if (noSelectedHandle() && WindowUtil.openWindowWithoutClosing("family-edit.fxml", table_id.getSelectionModel().getSelectedItem())) {
-            updateTable();
+            refreshFamilyList();
         }
     }
 
@@ -106,7 +131,12 @@ public class FamilyController extends NavbarController {
     private void deleteClicked() {
         if (noSelectedHandle()) {
             service.delete(table_id.getSelectionModel().getSelectedItem().getId());
-            updateTable();
+            refreshFamilyList();
         }
+    }
+
+    private void refreshFamilyList() {
+        familyList.setAll(service.readAll());
+        table_id.refresh();
     }
 }
