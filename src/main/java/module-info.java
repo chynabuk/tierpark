@@ -34,6 +34,4 @@ module com.example.tierpark {
     opens com.example.tierpark.controllers.feedAnimal to javafx.fxml;
     exports com.example.tierpark.controllers.user;
     opens com.example.tierpark.controllers.user to javafx.fxml;
-
-
 }

@@ -58,6 +58,14 @@ public class SignInController {
         }
     }
 
+    @FXML
+    protected void guestClicked() throws IOException {
+        CurrentUser.setUser(User.builder()
+                        .roleId(3)
+                .build());
+        WindowUtil.openWindow((Stage) container_id.getScene().getWindow(), "animal-view.fxml");
+    }
+
 
     private User isInputValid() {
         String errorMessage = "";

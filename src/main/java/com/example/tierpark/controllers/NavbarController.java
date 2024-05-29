@@ -1,7 +1,9 @@
 package com.example.tierpark.controllers;
 
+import com.example.tierpark.util.CurrentUser;
 import com.example.tierpark.util.WindowUtil;
 import javafx.fxml.FXML;
+import javafx.scene.control.Menu;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -9,8 +11,24 @@ import java.io.IOException;
 public abstract class NavbarController {
     protected Stage stageToClose;
 
+    @FXML
+    private Menu nav_animals;
+
+    @FXML
+    private Menu nav_feeds;
+
+    @FXML
+    private Menu nav_care;
+
+    @FXML
+    private Menu nav_building;
+
+    @FXML
+    private Menu nav_users;
+
     public void setStageToClose(Stage stage) {
         stageToClose = stage;
+        checkRole();
     }
 
     @FXML
@@ -65,7 +83,13 @@ public abstract class NavbarController {
 
 
     @FXML
-    protected void exitClicked() {
+    protected void exitClicked() throws IOException {
+        WindowUtil.openWindowSignIn(stageToClose, "sign-in-view.fxml");
+    }
 
+    protected void checkRole() {
+        if (CurrentUser.getUser().getRoleId() == 3) {
+            
+        }
     }
 }

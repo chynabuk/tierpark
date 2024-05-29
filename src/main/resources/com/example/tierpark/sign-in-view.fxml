@@ -9,7 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="container_id" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="490.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tierpark.controllers.SignInController">
+<AnchorPane fx:id="container_id" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="490.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tierpark.controllers.SignInController">
    <children>
       <Label layoutX="140.0" layoutY="235.0" text="Passwort:" />
       <Button alignment="CENTER" layoutX="198.0" layoutY="320.0" mnemonicParsing="false" onAction="#clickedSignIn" text="Einloggen">
@@ -22,7 +22,7 @@
       <PasswordField fx:id="password_id" layoutX="140.0" layoutY="261.0" prefHeight="26.0" prefWidth="206.0" />
       <TextField fx:id="login_id" layoutX="140.0" layoutY="200.0" prefHeight="26.0" prefWidth="206.0" styleClass="form-control" />
       <Label layoutX="140.0" layoutY="174.0" text="Benutzername:" />
-      <Label layoutX="213.0" layoutY="357.0" onMouseClicked="#signUpClicked" text="Anmeldung">
+      <Label layoutX="194.0" layoutY="357.0" onMouseClicked="#guestClicked" text="Als Gast anmelden">
          <styleClass>
             <String fx:value="text-primary" />
             <String fx:value="text-center" />
@@ -33,5 +33,11 @@
             <Image url="@../../../images/zoo_logo.png" />
          </image>
       </ImageView>
+      <Label layoutX="214.0" layoutY="379.0" onMouseClicked="#signUpClicked" text="Anmeldung">
+         <styleClass>
+            <String fx:value="text-primary" />
+            <String fx:value="text-center" />
+         </styleClass>
+      </Label>
    </children>
 </AnchorPane>
