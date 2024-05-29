@@ -149,11 +149,6 @@ public abstract class NavbarController {
         WindowUtil.openWindowSignIn(stageToClose, "sign-in-view.fxml");
     }
 
-    @FXML
-    protected void exportToXML() {
-
-    }
-
     private MenuBar findMenuBar(Node node) {
         if (node == null) {
             return null;
