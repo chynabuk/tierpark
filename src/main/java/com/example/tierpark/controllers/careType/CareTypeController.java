@@ -45,13 +45,18 @@ public class CareTypeController extends NavbarController {
         fileName = careTypeService.getTableName();
 
         // Load all data once
-        careTypeList = FXCollections.observableArrayList(careTypeService.readAll());
+        try {
+            careTypeList = FXCollections.observableArrayList(careTypeService.readAll());
 
-        col_id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
-        col_name.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getName()));
-        col_description.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getDescription()));
+            col_id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
+            col_name.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getName()));
+            col_description.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getDescription()));
 
-        updateTable();
+            updateTable();
+        }
+        catch (NullPointerException e){
+
+        }
     }
 
     private void updateTable() {

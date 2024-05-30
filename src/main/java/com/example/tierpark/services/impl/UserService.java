@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class UserService extends CrudOperations<User> {
     public UserService() {
@@ -130,5 +131,48 @@ public class UserService extends CrudOperations<User> {
         finally {
             JdbcSQLServerConnection.close();
         }
+    }
+
+    @Override
+    public List<User> readAll() {
+        if (CurrentUserService.getCurrentUser().getRoleId() == 3){
+            return null;
+        }
+        List<User> users = super.readAll();
+        users.removeIf(user -> user.getRoleId() == 1);
+        return users;
+    }
+
+    public boolean isUserExistedByLogin(String login){
+        Connection connection = JdbcSQLServerConnection.connect();
+        String sql = "SELECT * FROM " + getTableName() + " WHERE login=?";
+        User object = null;
+        try(PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, login);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()){
+                object = build(resultSet);
+                System.out.println("Record read");
+            }
+            else {
+                System.out.println("Record is not found");
+            }
+        }
+        catch (SQLException e) {
+            if ("42000".equals(e.getSQLState()) || e.getErrorCode() == 229) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erlaubnis verweigert");
+                alert.setContentText("Die SELECT-Erlaubnis wurde für die Tabelle '" + getTableName() + "' verweigert");
+                alert.showAndWait();
+            } else {
+                // Handle other SQL exceptions
+                e.printStackTrace();
+            }
+        }
+        finally {
+            JdbcSQLServerConnection.close();
+        }
+
+        return object != null;
     }
 }

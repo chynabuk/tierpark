@@ -80,18 +80,23 @@ public class UserController extends NavbarController {
         roleService = new RoleService();
 
         // Load all data once
-        userList = FXCollections.observableArrayList(userService.readAll());
-        loadRoles();
+        try {
+            userList = FXCollections.observableArrayList(userService.readAll());
+            loadRoles();
 
-        col_id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
-        col_login.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getLogin()));
-        col_name.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getName()));
-        col_lastname.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getLastname()));
-        col_birthdate.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(DateUtil.format(cellData.getValue().getBirthDate())));
-        col_gender.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getGenderId() == Gender.MAN.getId() ? Gender.MAN.toString() : Gender.WOMAN.toString()));
-        col_role.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(getRoleName(cellData.getValue().getRoleId())));
+            col_id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
+            col_login.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getLogin()));
+            col_name.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getName()));
+            col_lastname.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getLastname()));
+            col_birthdate.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(DateUtil.format(cellData.getValue().getBirthDate())));
+            col_gender.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getGenderId() == Gender.MAN.getId() ? Gender.MAN.toString() : Gender.WOMAN.toString()));
+            col_role.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(getRoleName(cellData.getValue().getRoleId())));
 
-        updateTable();
+            updateTable();
+        }
+        catch (NullPointerException e){
+
+        }
     }
 
     private void loadRoles() {
