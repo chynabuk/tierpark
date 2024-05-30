@@ -1,6 +1,7 @@
 package com.example.tierpark.services.impl;
 
 import com.example.tierpark.entities.FeedAnimal;
+import com.example.tierpark.entities.User;
 import com.example.tierpark.services.CrudOperations;
 
 import java.sql.PreparedStatement;
@@ -32,7 +33,8 @@ public class FeedAnimalService extends CrudOperations<FeedAnimal> {
         statement.setTimestamp(1, object.getFeedDateTime());
         statement.setInt(2, object.getFeedAmount());
         statement.setInt(3, object.getFeedId());
-        statement.setInt(4, object.getKeeperId());
+        User currentUser = CurrentUserService.getCurrentUser();
+        statement.setInt(4, currentUser.getRoleId() == 2 ? currentUser.getId() : object.getKeeperId());
         statement.setInt(5, object.getAnimalId());
     }
 

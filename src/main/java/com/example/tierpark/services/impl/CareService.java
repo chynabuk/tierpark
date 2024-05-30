@@ -1,6 +1,7 @@
 package com.example.tierpark.services.impl;
 
 import com.example.tierpark.entities.Care;
+import com.example.tierpark.entities.User;
 import com.example.tierpark.services.CrudOperations;
 
 import java.sql.PreparedStatement;
@@ -30,7 +31,8 @@ public class CareService extends CrudOperations<Care> {
     public void prepareStatementCreatingSetup(Care object, PreparedStatement statement) throws SQLException {
         statement.setDate(1, object.getDone());
         statement.setInt(2, object.getCareTypeId());
-        statement.setInt(3, object.getKeeperId());
+        User currentUser = CurrentUserService.getCurrentUser();
+        statement.setInt(3, currentUser.getRoleId() == 2 ? currentUser.getId() : object.getKeeperId());
         statement.setInt(4, object.getAnimalId());
     }
 
