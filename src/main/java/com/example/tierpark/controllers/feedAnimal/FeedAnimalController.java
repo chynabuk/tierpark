@@ -76,22 +76,27 @@ public class FeedAnimalController extends NavbarController {
         animalService = new AnimalService();
 
         // Load all data once
-        feedAnimalList = FXCollections.observableArrayList(service.readAll());
-        loadFeeds();
-        loadAnimals();
-        loadUsers();
+        try {
+            feedAnimalList = FXCollections.observableArrayList(service.readAll());
+            loadFeeds();
+            loadAnimals();
+            loadUsers();
 
-        col_id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
-        col_feed.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(getFeedName(cellData.getValue().getFeedId())));
-        col_feed_amount.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getFeedAmount()));
-        col_animal.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(getAnimalName(cellData.getValue().getAnimalId())));
-        col_keeper.setCellValueFactory(cellData -> {
-            User keeper = getUser(cellData.getValue().getKeeperId());
-            return new ReadOnlyStringWrapper(keeper.getName() + " " + keeper.getLastname());
-        });
-        col_feed_date_time.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(DateUtil.format(cellData.getValue().getFeedDateTime())));
+            col_id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
+            col_feed.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(getFeedName(cellData.getValue().getFeedId())));
+            col_feed_amount.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getFeedAmount()));
+            col_animal.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(getAnimalName(cellData.getValue().getAnimalId())));
+            col_keeper.setCellValueFactory(cellData -> {
+                User keeper = getUser(cellData.getValue().getKeeperId());
+                return new ReadOnlyStringWrapper(keeper.getName() + " " + keeper.getLastname());
+            });
+            col_feed_date_time.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(DateUtil.format(cellData.getValue().getFeedDateTime())));
 
-        updateTable();
+            updateTable();
+        }
+        catch (NullPointerException e){
+
+        }
     }
 
     private void loadFeeds() {

@@ -2,10 +2,12 @@ package com.example.tierpark.controllers.care;
 
 import com.example.tierpark.entities.*;
 import com.example.tierpark.services.impl.*;
+import com.example.tierpark.util.CurrentUser;
 import com.example.tierpark.util.DateUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -24,6 +26,9 @@ public class CareCreateController {
 
     @FXML
     private TextField done;
+
+    @FXML
+    private Label keeper;
 
     private CareService service;
     private AnimalService animalService;
@@ -57,18 +62,34 @@ public class CareCreateController {
             animal_id.getItems().add(animal.getName());
             animals.put(animal.getName(), animal.getId());
         }
+
+        if (CurrentUser.getUser().getRoleId() == 2) {
+            keeper_id.setVisible(false);
+            keeper.setVisible(false);
+        }
     }
     @FXML
     private void createClicked() {
         if (isInputValid()) {
-            service.insert(
-                    Care.builder()
-                            .done(DateUtil.parse(done.getText()))
-                            .careTypeId(careTypes.get(care_type_id.getValue()))
-                            .keeperId(keepers.get(keeper_id.getValue()))
-                            .animalId(animals.get(animal_id.getValue()))
-                            .build()
-            );
+            if (CurrentUser.getUser().getRoleId() == 2) {
+                service.insert(
+                        Care.builder()
+                                .done(DateUtil.parse(done.getText()))
+                                .careTypeId(careTypes.get(care_type_id.getValue()))
+                                .keeperId(CurrentUser.getUser().getId())
+                                .animalId(animals.get(animal_id.getValue()))
+                                .build()
+                );
+            } else {
+                service.insert(
+                        Care.builder()
+                                .done(DateUtil.parse(done.getText()))
+                                .careTypeId(careTypes.get(care_type_id.getValue()))
+                                .keeperId(keepers.get(keeper_id.getValue()))
+                                .animalId(animals.get(animal_id.getValue()))
+                                .build()
+                );
+            }
             ((Stage) done.getScene().getWindow()).close();
         }
 
@@ -79,9 +100,6 @@ public class CareCreateController {
 
         if (animal_id.getValue() == null || animal_id.getValue().length() == 0) {
             errorMessage += "Kein gültiges Tier!\n";
-        }
-        if (keeper_id.getValue() == null || keeper_id.getValue().length() == 0){
-            errorMessage += "Kein gültiger Tierpfleger!\n";
         }
         if (done.getText() == null || done.getText().length() == 0) {
             errorMessage += "Kein gültiges Pflegedatum!\n";

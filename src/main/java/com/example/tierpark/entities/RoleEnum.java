@@ -1,8 +1,8 @@
 package com.example.tierpark.entities;
 
 public enum RoleEnum {
-    VISITOR,
-    EMPLOYEE,
+    GAST,
+    MITARBEITER,
     ADMIN() {
         @Override
         public String toString() {
@@ -12,9 +12,9 @@ public enum RoleEnum {
 
     public static RoleEnum getRoleById(int id){
         return switch (id) {
-            case 2 -> EMPLOYEE;
-            case 3 -> ADMIN;
-            default -> VISITOR;
+            case 2 -> MITARBEITER;
+            case 1 -> ADMIN;
+            default -> GAST;
         };
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Animals>
     <Animal>
-        <ID>57</ID>
+        <ID>1</ID>
         <Name>Simba</Name>
         <BirthDate>10.06.2018</BirthDate>
         <Type>Lion</Type>
@@ -9,7 +9,7 @@
         <Gender>Männlich</Gender>
     </Animal>
     <Animal>
-        <ID>58</ID>
+        <ID>2</ID>
         <Name>Nala</Name>
         <BirthDate>15.07.2019</BirthDate>
         <Type>Lion</Type>
@@ -17,7 +17,7 @@
         <Gender>Weiblich</Gender>
     </Animal>
     <Animal>
-        <ID>59</ID>
+        <ID>3</ID>
         <Name>Mufasa</Name>
         <BirthDate>05.05.2015</BirthDate>
         <Type>Lion</Type>
@@ -25,7 +25,7 @@
         <Gender>Männlich</Gender>
     </Animal>
     <Animal>
-        <ID>60</ID>
+        <ID>4</ID>
         <Name>Sarabi</Name>
         <BirthDate>12.08.2016</BirthDate>
         <Type>Lion</Type>
@@ -33,7 +33,7 @@
         <Gender>Weiblich</Gender>
     </Animal>
     <Animal>
-        <ID>61</ID>
+        <ID>5</ID>
         <Name>Sealie</Name>
         <BirthDate>21.04.2020</BirthDate>
         <Type>Seal</Type>
@@ -41,7 +41,7 @@
         <Gender>Männlich</Gender>
     </Animal>
     <Animal>
-        <ID>62</ID>
+        <ID>6</ID>
         <Name>Flippy</Name>
         <BirthDate>30.05.2021</BirthDate>
         <Type>Seal</Type>
@@ -49,7 +49,7 @@
         <Gender>Männlich</Gender>
     </Animal>
     <Animal>
-        <ID>63</ID>
+        <ID>7</ID>
         <Name>Splash</Name>
         <BirthDate>18.03.2019</BirthDate>
         <Type>Seal</Type>
@@ -57,7 +57,7 @@
         <Gender>Weiblich</Gender>
     </Animal>
     <Animal>
-        <ID>64</ID>
+        <ID>8</ID>
         <Name>Vlad</Name>
         <BirthDate>09.09.2017</BirthDate>
         <Type>Vulture</Type>
@@ -65,7 +65,7 @@
         <Gender>Männlich</Gender>
     </Animal>
     <Animal>
-        <ID>65</ID>
+        <ID>9</ID>
         <Name>Igor</Name>
         <BirthDate>11.10.2018</BirthDate>
         <Type>Vulture</Type>
@@ -73,7 +73,7 @@
         <Gender>Männlich</Gender>
     </Animal>
     <Animal>
-        <ID>66</ID>
+        <ID>10</ID>
         <Name>Helga</Name>
         <BirthDate>14.02.2019</BirthDate>
         <Type>Vulture</Type>
@@ -81,163 +81,147 @@
         <Gender>Weiblich</Gender>
     </Animal>
     <Animal>
-        <ID>67</ID>
+        <ID>11</ID>
         <Name>Slinky</Name>
         <BirthDate>25.11.2016</BirthDate>
-        <Type>Vulture</Type>
+        <Type>Python</Type>
         <Building>Reptilienhaus</Building>
         <Gender>Männlich</Gender>
     </Animal>
     <Animal>
-        <ID>68</ID>
+        <ID>12</ID>
         <Name>Slithers</Name>
         <BirthDate>30.12.2015</BirthDate>
-        <Type>Vulture</Type>
+        <Type>Python</Type>
         <Building>Reptilienhaus</Building>
         <Gender>Weiblich</Gender>
     </Animal>
     <Animal>
-        <ID>69</ID>
+        <ID>13</ID>
         <Name>Pythonia</Name>
         <BirthDate>05.01.2017</BirthDate>
-        <Type>Vulture</Type>
+        <Type>Python</Type>
         <Building>Reptilienhaus</Building>
         <Gender>Weiblich</Gender>
     </Animal>
     <Animal>
-        <ID>70</ID>
+        <ID>14</ID>
         <Name>Dumbo</Name>
         <BirthDate>01.08.2012</BirthDate>
-        <Type>Vulture</Type>
+        <Type>Elephant</Type>
         <Building>Elefantengehege</Building>
         <Gender>Männlich</Gender>
     </Animal>
     <Animal>
-        <ID>71</ID>
+        <ID>15</ID>
         <Name>Ellie</Name>
         <BirthDate>10.09.2013</BirthDate>
-        <Type>Vulture</Type>
+        <Type>Elephant</Type>
         <Building>Elefantengehege</Building>
         <Gender>Weiblich</Gender>
     </Animal>
     <Animal>
-        <ID>72</ID>
+        <ID>16</ID>
         <Name>Babar</Name>
         <BirthDate>20.07.2014</BirthDate>
-        <Type>Vulture</Type>
+        <Type>Elephant</Type>
         <Building>Elefantengehege</Building>
         <Gender>Männlich</Gender>
     </Animal>
     <Animal>
-        <ID>73</ID>
+        <ID>17</ID>
         <Name>George</Name>
         <BirthDate>22.04.2014</BirthDate>
-        <Type>Vulture</Type>
+        <Type>Chimpanzee</Type>
         <Building>Primatenhaus</Building>
         <Gender>Männlich</Gender>
     </Animal>
     <Animal>
-        <ID>74</ID>
+        <ID>18</ID>
         <Name>Ceasar</Name>
         <BirthDate>28.05.2015</BirthDate>
-        <Type>Vulture</Type>
+        <Type>Chimpanzee</Type>
         <Building>Primatenhaus</Building>
         <Gender>Männlich</Gender>
     </Animal>
     <Animal>
-        <ID>75</ID>
+        <ID>19</ID>
         <Name>Bella</Name>
         <BirthDate>15.06.2016</BirthDate>
-        <Type>Vulture</Type>
+        <Type>Chimpanzee</Type>
         <Building>Primatenhaus</Building>
         <Gender>Weiblich</Gender>
     </Animal>
     <Animal>
-        <ID>79</ID>
-        <Name>Simba</Name>
-        <BirthDate>10.06.2018</BirthDate>
-        <Type>Lion</Type>
-        <Building>Löwengehege</Building>
+        <ID>20</ID>
+        <Name>Stripey</Name>
+        <BirthDate>07.07.2017</BirthDate>
+        <Type>Zebra</Type>
+        <Building>Savannengehege</Building>
         <Gender>Männlich</Gender>
     </Animal>
     <Animal>
-        <ID>80</ID>
-        <Name>Nala</Name>
-        <BirthDate>15.07.2019</BirthDate>
-        <Type>Lion</Type>
-        <Building>Löwengehege</Building>
+        <ID>21</ID>
+        <Name>Marty</Name>
+        <BirthDate>14.08.2018</BirthDate>
+        <Type>Zebra</Type>
+        <Building>Savannengehege</Building>
+        <Gender>Männlich</Gender>
+    </Animal>
+    <Animal>
+        <ID>22</ID>
+        <Name>Zigzag</Name>
+        <BirthDate>21.09.2019</BirthDate>
+        <Type>Zebra</Type>
+        <Building>Savannengehege</Building>
         <Gender>Weiblich</Gender>
     </Animal>
     <Animal>
-        <ID>81</ID>
-        <Name>Mufasa</Name>
-        <BirthDate>05.05.2015</BirthDate>
-        <Type>Lion</Type>
-        <Building>Löwengehege</Building>
+        <ID>23</ID>
+        <Name>Pavo</Name>
+        <BirthDate>03.03.2020</BirthDate>
+        <Type>Peafowl</Type>
+        <Building>Tropenhaus</Building>
         <Gender>Männlich</Gender>
     </Animal>
     <Animal>
-        <ID>82</ID>
-        <Name>Sarabi</Name>
-        <BirthDate>12.08.2016</BirthDate>
-        <Type>Lion</Type>
-        <Building>Löwengehege</Building>
+        <ID>24</ID>
+        <Name>Feather</Name>
+        <BirthDate>04.04.2021</BirthDate>
+        <Type>Peafowl</Type>
+        <Building>Tropenhaus</Building>
         <Gender>Weiblich</Gender>
     </Animal>
     <Animal>
-        <ID>83</ID>
-        <Name>Sealie</Name>
-        <BirthDate>21.04.2020</BirthDate>
-        <Type>Seal</Type>
-        <Building>Robbenbecken</Building>
+        <ID>25</ID>
+        <Name>Plume</Name>
+        <BirthDate>05.05.2022</BirthDate>
+        <Type>Peafowl</Type>
+        <Building>Tropenhaus</Building>
         <Gender>Männlich</Gender>
     </Animal>
     <Animal>
-        <ID>84</ID>
-        <Name>Flippy</Name>
-        <BirthDate>30.05.2021</BirthDate>
-        <Type>Seal</Type>
-        <Building>Robbenbecken</Building>
+        <ID>26</ID>
+        <Name>Snappy</Name>
+        <BirthDate>10.10.2013</BirthDate>
+        <Type>Crocodile</Type>
+        <Building>Krokodilbecken</Building>
         <Gender>Männlich</Gender>
     </Animal>
     <Animal>
-        <ID>85</ID>
-        <Name>Splash</Name>
-        <BirthDate>18.03.2019</BirthDate>
-        <Type>Seal</Type>
-        <Building>Robbenbecken</Building>
+        <ID>27</ID>
+        <Name>Jaws</Name>
+        <BirthDate>15.11.2014</BirthDate>
+        <Type>Crocodile</Type>
+        <Building>Krokodilbecken</Building>
+        <Gender>Männlich</Gender>
+    </Animal>
+    <Animal>
+        <ID>28</ID>
+        <Name>Gummy</Name>
+        <BirthDate>20.12.2015</BirthDate>
+        <Type>Crocodile</Type>
+        <Building>Krokodilbecken</Building>
         <Gender>Weiblich</Gender>
-    </Animal>
-    <Animal>
-        <ID>86</ID>
-        <Name>Vlad</Name>
-        <BirthDate>09.09.2017</BirthDate>
-        <Type>Vulture</Type>
-        <Building>Vogelvoliere</Building>
-        <Gender>Männlich</Gender>
-    </Animal>
-    <Animal>
-        <ID>87</ID>
-        <Name>Igor</Name>
-        <BirthDate>11.10.2018</BirthDate>
-        <Type>Vulture</Type>
-        <Building>Vogelvoliere</Building>
-        <Gender>Männlich</Gender>
-    </Animal>
-    <Animal>
-        <ID>88</ID>
-        <Name>Helga</Name>
-        <BirthDate>14.02.2019</BirthDate>
-        <Type>Vulture</Type>
-        <Building>Vogelvoliere</Building>
-        <Gender>Weiblich</Gender>
-    </Animal>
-    <Animal>
-        <ID>89</ID>
-        <Name>Slinky</Name>
-        <BirthDate>25.11.2016</BirthDate>
-        <Type>Vulture</Type>
-        <Building>Reptilienhaus</Building>
-        <Gender>Männlich</Gender>
     </Animal>
 </Animals>

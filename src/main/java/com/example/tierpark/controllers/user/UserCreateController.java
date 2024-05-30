@@ -68,6 +68,12 @@ public class UserCreateController {
         if (login_id.getText() == null || login_id.getText().length() == 0) {
             errorMessage += "Kein gültiger Benutzername!\n";
         }
+        else{
+            if (userService.isUserExistedByLogin(login_id.getText().trim())){
+                errorMessage += "Ein Benutzer mit diesem Login existiert!\n";
+            }
+        }
+
         if (name_id.getText() == null || name_id.getText().length() == 0) {
             errorMessage += "Kein gültiger Vorname!\n";
         }

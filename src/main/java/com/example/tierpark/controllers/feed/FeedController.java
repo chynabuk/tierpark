@@ -53,14 +53,18 @@ public class FeedController extends NavbarController {
         fileName = feedService.getTableName();
 
         // Load all data once
-        feedList = FXCollections.observableArrayList(feedService.readAll());
+        try {
+            feedList = FXCollections.observableArrayList(feedService.readAll());
+            col_id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
+            col_name.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getName()));
+            col_measure.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getMeasure()));
+            col_price.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getPricePerUnit() + " €"));
 
-        col_id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
-        col_name.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getName()));
-        col_measure.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getMeasure()));
-        col_price.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getPricePerUnit() + " €"));
+            updateTable();
+        }
+        catch (NullPointerException e){
 
-        updateTable();
+        }
     }
 
     private void updateTable() {

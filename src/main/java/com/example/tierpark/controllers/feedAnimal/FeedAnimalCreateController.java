@@ -5,10 +5,12 @@ import com.example.tierpark.services.impl.AnimalService;
 import com.example.tierpark.services.impl.FeedAnimalService;
 import com.example.tierpark.services.impl.FeedService;
 import com.example.tierpark.services.impl.UserService;
+import com.example.tierpark.util.CurrentUser;
 import com.example.tierpark.util.DateUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lombok.AccessLevel;
@@ -29,6 +31,8 @@ public class FeedAnimalCreateController {
     ChoiceBox<String> keeper_id;
     @FXML
     TextField feed_date_time;
+    @FXML
+    Label keeper;
 
     FeedAnimalService service;
     FeedService feedService;
@@ -45,6 +49,11 @@ public class FeedAnimalCreateController {
         feedService = new FeedService();
         animalService = new AnimalService();
         userService = new UserService();
+
+        if (CurrentUser.getUser().getRoleId() == 2) {
+            keeper_id.setVisible(false);
+            keeper.setVisible(false);
+        }
 
         feeds = new HashMap<>();
         for (Feed feed : feedService.readAll()){
@@ -69,15 +78,27 @@ public class FeedAnimalCreateController {
     @FXML
     private void createClicked() {
         if (isInputValid()) {
-            service.insert(
-                    FeedAnimal.builder()
-                            .feedId(feeds.get(feed_id.getValue()))
-                            .feedAmount(Integer.parseInt(feed_amount.getText()))
-                            .keeperId(keepers.get(keeper_id.getValue()))
-                            .animalId(animals.get(animal_id.getValue()))
-                            .feedDateTime(DateUtil.parseDatetime(feed_date_time.getText()))
-                            .build()
-            );
+            if (CurrentUser.getUser().getRoleId() == 2) {
+                service.insert(
+                        FeedAnimal.builder()
+                                .feedId(feeds.get(feed_id.getValue()))
+                                .feedAmount(Integer.parseInt(feed_amount.getText()))
+                                .keeperId(CurrentUser.getUser().getId())
+                                .animalId(animals.get(animal_id.getValue()))
+                                .feedDateTime(DateUtil.parseDatetime(feed_date_time.getText()))
+                                .build()
+                );
+            } else {
+                service.insert(
+                        FeedAnimal.builder()
+                                .feedId(feeds.get(feed_id.getValue()))
+                                .feedAmount(Integer.parseInt(feed_amount.getText()))
+                                .keeperId(keepers.get(keeper_id.getValue()))
+                                .animalId(animals.get(animal_id.getValue()))
+                                .feedDateTime(DateUtil.parseDatetime(feed_date_time.getText()))
+                                .build()
+                );
+            }
             ((Stage) feed_id.getScene().getWindow()).close();
         }
 
@@ -106,9 +127,6 @@ public class FeedAnimalCreateController {
 
         if (animal_id.getValue() == null || animal_id.getValue().length() == 0) {
             errorMessage += "Kein gültiges Tier!\n";
-        }
-        if (keeper_id.getValue() == null || keeper_id.getValue().length() == 0){
-            errorMessage += "Kein gültiger Tierpfleger!\n";
         }
         if (feed_date_time.getText() == null || feed_date_time.getText().length() == 0) {
             errorMessage += "Keine gültige Fütterungsdatum und -uhrzeit!\n";

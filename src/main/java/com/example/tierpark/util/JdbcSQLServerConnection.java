@@ -8,8 +8,7 @@ import java.sql.SQLException;
 public class JdbcSQLServerConnection {
     private static final String SERVER = "KUBA\\DIGGER";
     private static final String DB_URL = "jdbc:sqlserver://" + SERVER + ";databaseName=Tierpark;encrypt=false";
-    private static final RoleEnum USER_VISITOR = RoleEnum.ADMIN;
-    private static RoleEnum CURRENT_USER = USER_VISITOR;
+    private static RoleEnum CURRENT_USER = RoleEnum.ADMIN;
     private static final String PASSWORD = "1234";
     private static Connection connection;
 

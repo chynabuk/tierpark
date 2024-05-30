@@ -68,21 +68,26 @@ public class CareController extends NavbarController {
         animalService = new AnimalService();
 
         // Load all data once
-        careList = FXCollections.observableArrayList(service.readAll());
-        loadCareTypes();
-        loadAnimals();
-        loadUsers();
+        try {
+            careList = FXCollections.observableArrayList(service.readAll());
+            loadCareTypes();
+            loadAnimals();
+            loadUsers();
 
-        col_id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
-        col_care_type.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(getCareTypeName(cellData.getValue().getCareTypeId())));
-        col_animal.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(getAnimalName(cellData.getValue().getAnimalId())));
-        col_keeper.setCellValueFactory(cellData -> {
-            User keeper = getUser(cellData.getValue().getKeeperId());
-            return new ReadOnlyStringWrapper(keeper.getName() + " " + keeper.getLastname());
-        });
-        col_done.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(DateUtil.format(cellData.getValue().getDone())));
+            col_id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
+            col_care_type.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(getCareTypeName(cellData.getValue().getCareTypeId())));
+            col_animal.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(getAnimalName(cellData.getValue().getAnimalId())));
+            col_keeper.setCellValueFactory(cellData -> {
+                User keeper = getUser(cellData.getValue().getKeeperId());
+                return new ReadOnlyStringWrapper(keeper.getName() + " " + keeper.getLastname());
+            });
+            col_done.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(DateUtil.format(cellData.getValue().getDone())));
 
-        updateTable();
+            updateTable();
+        }
+        catch (NullPointerException e){
+
+        }
     }
 
     private void loadCareTypes() {
