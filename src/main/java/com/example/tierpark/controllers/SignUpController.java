@@ -86,8 +86,7 @@ public class SignUpController {
                     .roleId(2)
                     .build();
             userService.insert(user);
-            CurrentUser.setUser(user);
-            WindowUtil.openWindow((Stage) container_id.getScene().getWindow(), "animal-view.fxml");
+            WindowUtil.openWindowSignIn((Stage) container_id.getScene().getWindow(), "sign-in-view.fxml");
         }
     }
 

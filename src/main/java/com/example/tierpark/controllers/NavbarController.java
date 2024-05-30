@@ -1,6 +1,7 @@
 package com.example.tierpark.controllers;
 
 import com.example.tierpark.util.CurrentUser;
+import com.example.tierpark.util.JdbcSQLServerConnection;
 import com.example.tierpark.util.WindowUtil;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -146,6 +147,7 @@ public abstract class NavbarController {
 
     @FXML
     protected void exitClicked() throws IOException {
+        JdbcSQLServerConnection.changeConfiguration(1);
         WindowUtil.openWindowSignIn(stageToClose, "sign-in-view.fxml");
     }
 
