@@ -14,13 +14,13 @@ public class InitDB {
         UserService userService = new UserService();
         userService.insert(
                 User.builder()
-                        .name("buba")
-                        .lastname("buba")
-                        .login("buba")
+                        .name("admin")
+                        .lastname("admin")
+                        .login("admin")
                         .birthDate(Date.valueOf("2002-06-03"))
                         .genderId(1)
                         .roleId(1)
-                        .password("buba")
+                        .password("admin")
                         .build()
         );
     }

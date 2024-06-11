@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class JdbcSQLServerConnection {
     private static final String SERVER = "KUBA\\DIGGER";
-    private static final String DB_URL = "jdbc:sqlserver://" + SERVER + ";databaseName=Tierpark;encrypt=false";
+    private static final String DB_URL = "jdbc:sqlserver://" + SERVER + ";databaseName=Tierpark2;encrypt=false";
     private static RoleEnum CURRENT_USER = RoleEnum.ADMIN;
     private static final String PASSWORD = "1234";
     private static Connection connection;
@@ -26,9 +26,8 @@ public class JdbcSQLServerConnection {
 
     public static void changeConfiguration(int roleId){
         RoleEnum role = RoleEnum.getRoleById(roleId);
-        if (!CURRENT_USER.equals(role)){
-            CURRENT_USER = role;
-        }
+        CURRENT_USER = role;
+
     }
 
     public static void close(){
