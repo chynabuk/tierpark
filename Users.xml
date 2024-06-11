@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Users>
     <User>
-        <ID>1</ID>
-        <Login>kuba</Login>
-        <Name>Kubanychbek2</Name>
-        <Lastname>Kushtarbekov23</Lastname>
-        <Birthdate>06.03.2002</Birthdate>
+        <ID>2</ID>
+        <Login>arbeiter</Login>
+        <Name>Alaken</Name>
+        <Lastname>Kubatbekov</Lastname>
+        <Birthdate>11.09.2002</Birthdate>
         <Gender>Männlich</Gender>
-        <Role>ADMIN</Role>
+        <Role>MITARBEITER</Role>
     </User>
 </Users>
